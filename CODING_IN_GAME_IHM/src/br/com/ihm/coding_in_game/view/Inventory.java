@@ -19,6 +19,7 @@ public class Inventory extends Panel {
 
 	public Inventory() {
 		setBounds(1066, 0, 300, Window.HEIGHT);
+		setBackground(Color.red);
 		
 	}
 

@@ -17,6 +17,7 @@ public class Console extends Panel {
 	Console() {
 
 		setBounds(0, 668, 1066, 100);
+		setBackground(Color.gray);
 	}
 
 	@Override

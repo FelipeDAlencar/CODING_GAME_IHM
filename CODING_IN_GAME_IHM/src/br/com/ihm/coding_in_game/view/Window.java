@@ -12,7 +12,7 @@ public class Window extends JFrame implements KeyListener {
 	public static int WIDTH, HEIGHT;
 	private Inventory inventory;
 	private Console console;
-	private World world;
+	private Phase phase;
 	private static final long serialVersionUID = 1L;
 
 	public Window(int largura, int altura) {
@@ -29,19 +29,15 @@ public class Window extends JFrame implements KeyListener {
 		// Instantiation
 		inventory = new Inventory();
 		console = new Console();
-
+		phase = new Phase();
 		addKeyListener(this);
 
 		add(console);
 		add(inventory);
+		add(phase);
 
 	}
 
-	@Override
-	public void paint(Graphics g) {
-		super.paint(g);
-
-	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {

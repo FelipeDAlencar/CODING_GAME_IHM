@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.5" tiledversion="1.5.0" orientation="orthogonal" renderorder="right-down" width="35" height="21" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="1">
+ <editorsettings>
+  <export target="TILES_CSV/MAP_03/MAP_03.csv" format="csv"/>
+ </editorsettings>
  <tileset firstgid="1" source="TILESET_CODING_IN_GAME_ZELDA.tsx"/>
- <layer id="1" name="GRAMA/ESTRADA" width="35" height="21">
+ <layer id="1" name="GRAMA_ESTRADA" width="35" height="21">
   <data encoding="csv">
 1175,1176,1176,1176,1176,1176,1176,1176,1176,1176,1176,1176,1176,1176,1176,1176,1176,1176,1176,1176,1176,1176,1176,1176,1176,1176,1176,1176,1176,1176,1176,1176,1176,1176,1177,
 1215,1178,1178,1178,1283,1283,1283,1283,1283,1283,1283,1283,1283,1283,1283,1283,1283,1283,1283,1283,1283,1178,1178,1178,1178,1178,1178,1178,1178,1178,1178,1178,1178,1178,1217,
