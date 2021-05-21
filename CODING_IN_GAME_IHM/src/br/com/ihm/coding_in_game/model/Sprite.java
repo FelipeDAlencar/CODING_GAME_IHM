@@ -1,39 +1,37 @@
 package br.com.ihm.coding_in_game.model;
 
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
 public abstract class Sprite {
-	protected BufferedImage personagem;
-	protected int largura, altura;
-	protected int linhas, colunas;
+	protected BufferedImage hero;
+	protected int width, height;
+	protected int rows, cols;
 	protected int posX, posY;
 	protected BufferedImage[] sprites;
-	protected int aparencia;
-	protected int cima, baixo, esquerda, direita, morte;
-
-	private String direcao;
+	protected int aparence;
+	protected int up, down, left, right;
+	private String direction;
 
 	protected Sprite(int aparencia, int largura, int altura, int colunas, int linhas, int posX, int posY, String endereco) throws IOException {
 
 		try {
-			this.personagem = ImageIO.read(getClass().getResource(endereco));
-			this.aparencia = aparencia;
-			this.largura = largura;
-			this.altura = altura;
+			this.hero = ImageIO.read(getClass().getResource(endereco));
+			this.aparence = aparencia;
+			this.width = largura;
+			this.height = altura;
 
-			this.linhas = colunas;
-			this.colunas = linhas;
+			this.rows = colunas;
+			this.cols = linhas;
 			this.posX = posX;
 			this.posY = posY;
 
 			sprites = new BufferedImage[colunas * linhas];
 			for (int i = 0; i < colunas; i++) {
 				for (int j = 0; j < linhas; j++) {
-					sprites[(i * linhas) + j] = personagem.getSubimage(i* (largura / colunas), j * (altura / linhas), largura / colunas, altura / linhas);
+					sprites[(i * linhas) + j] = hero.getSubimage(i* (largura / colunas), j * (altura / linhas), largura / colunas, altura / linhas);
 				}
 			}
 		} catch (IOException e) {
@@ -42,46 +40,46 @@ public abstract class Sprite {
 		}
 	}
 
-	public abstract void animar(String direcao);
+	public abstract void animate(String direcao);
 
-	public BufferedImage getPersonagem() {
-		return personagem;
+	public BufferedImage getHero() {
+		return hero;
 	}
 
-	public void setPersonagem(BufferedImage personagem) {
-		this.personagem = personagem;
+	public void setHero(BufferedImage hero) {
+		this.hero = hero;
 	}
 
-	public int getLargura() {
-		return largura;
+	public int getWidth() {
+		return width;
 	}
 
-	public void setLargura(int largura) {
-		this.largura = largura;
+	public void setWidth(int width) {
+		this.width = width;
 	}
 
-	public int getAltura() {
-		return altura;
+	public int getHeight() {
+		return height;
 	}
 
-	public void setAltura(int altura) {
-		this.altura = altura;
+	public void setHeight(int height) {
+		this.height = height;
 	}
 
-	public int getLinhas() {
-		return linhas;
+	public int getRows() {
+		return rows;
 	}
 
-	public void setLinhas(int linhas) {
-		this.linhas = linhas;
+	public void setRows(int rows) {
+		this.rows = rows;
 	}
 
-	public int getColunas() {
-		return colunas;
+	public int getCols() {
+		return cols;
 	}
 
-	public void setColunas(int colunas) {
-		this.colunas = colunas;
+	public void setCols(int cols) {
+		this.cols = cols;
 	}
 
 	public int getPosX() {
@@ -108,61 +106,54 @@ public abstract class Sprite {
 		this.sprites = sprites;
 	}
 
-	public int getAparencia() {
-		return aparencia;
+	public int getAparence() {
+		return aparence;
 	}
 
-	public void setAparencia(int aparencia) {
-		this.aparencia = aparencia;
+	public void setAparence(int aparence) {
+		this.aparence = aparence;
 	}
 
-	public int getCima() {
-		return cima;
+	public int getUp() {
+		return up;
 	}
 
-	public void setCima(int cima) {
-		this.cima = cima;
+	public void setUp(int up) {
+		this.up = up;
 	}
 
-	public int getBaixo() {
-		return baixo;
+	public int getDown() {
+		return down;
 	}
 
-	public void setBaixo(int baixo) {
-		this.baixo = baixo;
+	public void setDown(int down) {
+		this.down = down;
 	}
 
-	public int getEsquerda() {
-		return esquerda;
+	public int getLeft() {
+		return left;
 	}
 
-	public void setEsquerda(int esquerda) {
-		this.esquerda = esquerda;
+	public void setLeft(int left) {
+		this.left = left;
 	}
 
-	public int getDireita() {
-		return direita;
+	public int getRight() {
+		return right;
 	}
 
-	public void setDireita(int direita) {
-		this.direita = direita;
+	public void setRight(int right) {
+		this.right = right;
 	}
 
-	public int getMorte() {
-		return morte;
+	public String getDirection() {
+		return direction;
 	}
 
-	public void setMorte(int morte) {
-		this.morte = morte;
+	public void setDirection(String direction) {
+		this.direction = direction;
 	}
 
-	public String getDirecao() {
-		return direcao;
-	}
-
-	public void setDirecao(String direcao) {
-		this.direcao = direcao;
-	}
 	
 	
 

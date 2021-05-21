@@ -8,7 +8,7 @@ import br.com.ihm.coding_in_game.model.Camera;
 import br.com.ihm.coding_in_game.model.Hero;
 import br.com.ihm.coding_in_game.model.TileMap;
 
-public class Phase extends Panel {
+public class Phase extends Panel implements Runnable {
 	/**
 	 * 
 	 */
@@ -18,14 +18,34 @@ public class Phase extends Panel {
 	private Hero hero;
 	private String basePathLayers = "assets/TILE/TILES_CSV/MAP_01/";
 	private String basePathTileSet = "assets/TILE/gfx/";
-	private boolean isInit;
-
+	private boolean isInit, loop = true;
+	Thread thread;
+	
 	public Phase() {
 
 		setBounds(0, 0, 1046, Window.HEIGHT);
+		
 
+		try {
+			hero = new Hero(1, 272, 256, 18, 8, 30, 370, "/" + basePathTileSet + "character.png");
+		} catch (IOException e) {
+			System.out.println("ERRO HERO NOT FOUND.");
+			e.printStackTrace();
+		}
+		
+		
+		
 		isInit = true;
 		setVisible(false);
+
+	}
+	
+	public void addNotify() {
+		super.addNotify();
+		if (thread == null) {
+			thread = new Thread(this);
+			thread.start();
+		}
 
 	}
 
@@ -45,13 +65,6 @@ public class Phase extends Panel {
 		layers.add(layerBomb);
 		layers.add(layerFlags);
 
-		try {
-			hero = new Hero(1, 272, 256, 18, 8, 30, 370, "/" + basePathTileSet + "character.png");
-		} catch (IOException e) {
-			System.out.println("ERRO HERO NOT FOUND.");
-			e.printStackTrace();
-		}
-		
 
 	}
 
@@ -60,14 +73,112 @@ public class Phase extends Panel {
 		super.paint(g);
 		if (isInit) {
 			init();
-			for (TileMap layer : layers) {
-				layer.mountMap();
-				g.drawImage(layer.getMap(), 0, 0, 1046, Window.HEIGHT, null);
-			}
-			g.drawImage(hero.getSprites()[hero.getAparencia()], hero.getPosX(), hero.getPosY(), null);
-			isInit = false;
 		}
+		
+		for (TileMap layer : layers) {
+			layer.mountMap();
+			g.drawImage(layer.getMap(), 0, 0, 1046, Window.HEIGHT, null);
+		}
+		g.drawImage(hero.getSprites()[hero.getAparence()], hero.getPosX(), hero.getPosY(), null);
+		
+		
+		//hero.draw(g);
+		isInit = false;
 
 	}
+	
+	@Override
+	public void run() {
+		while (true) {
+			try {
+				if (loop) {
+					gameUpdate();
+					gameRender();
+					gameDraw();
+				}
+				Thread.sleep(5);
+
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+
+			}
+
+		}
+		
+		
+	}
+	
+
+	public void gameDraw() {
+		
+	}
+
+	public void gameRender() {
+		repaint();
+		
+	}
+
+	public void gameUpdate() {
+		
+	}
+
+	public ArrayList<TileMap> getLayers() {
+		return layers;
+	}
+
+	public void setLayers(ArrayList<TileMap> layers) {
+		this.layers = layers;
+	}
+
+	public TileMap getLayerRoadGrass() {
+		return layerRoadGrass;
+	}
+
+	public void setLayerRoadGrass(TileMap layerRoadGrass) {
+		this.layerRoadGrass = layerRoadGrass;
+	}
+
+	public TileMap getLayerDoor() {
+		return layerDoor;
+	}
+
+	public void setLayerDoor(TileMap layerDoor) {
+		this.layerDoor = layerDoor;
+	}
+
+	public TileMap getLayerObjects() {
+		return layerObjects;
+	}
+
+	public void setLayerObjects(TileMap layerObjects) {
+		this.layerObjects = layerObjects;
+	}
+
+	public TileMap getLayerBomb() {
+		return layerBomb;
+	}
+
+	public void setLayerBomb(TileMap layerBomb) {
+		this.layerBomb = layerBomb;
+	}
+
+	public TileMap getLayerFlags() {
+		return layerFlags;
+	}
+
+	public void setLayerFlags(TileMap layerFlags) {
+		this.layerFlags = layerFlags;
+	}
+
+	public Hero getHero() {
+		return hero;
+	}
+
+	public void setHero(Hero hero) {
+		this.hero = hero;
+	}
+
+	
+	
 
 }

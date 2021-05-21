@@ -24,7 +24,7 @@ public class Start extends Panel {
 
 		buttonSettings = new JButton("");
 		buttonSettings.setBounds(x, y, width, height);
-		buttonSettings.setToolTipText("Configurações");
+		buttonSettings.setToolTipText("<html><center><strong>CONFIGURAÇÕES</strong></center></html>");
 		buttonSettings.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
 		buttonSettings.setOpaque(false);
@@ -34,7 +34,7 @@ public class Start extends Panel {
 		x += margin;
 		buttonHelp = new JButton("");
 		buttonHelp.setBounds(x, y, width, height);
-		buttonHelp.setToolTipText("Ajuda");
+		buttonHelp.setToolTipText("<html><center><strong>AJUDA</strong></center></html>");
 		buttonHelp.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		
 		
@@ -46,7 +46,7 @@ public class Start extends Panel {
 		x += margin;
 		buttonClose = new JButton("");
 		buttonClose.setBounds(x, y, width, height);
-		buttonClose.setToolTipText("Fechar");
+		buttonClose.setToolTipText("<html><center><strong>FECHAR</strong></center></html>");
 		buttonClose.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
 		buttonClose.setOpaque(false);
@@ -56,7 +56,7 @@ public class Start extends Panel {
 		x += margin;
 		buttonStartGame = new JButton("");
 		buttonStartGame.setBounds(x, y, width, height);
-		buttonStartGame.setToolTipText("Iniciar jogo");
+		buttonStartGame.setToolTipText("<html><center><strong>INICIAR JOGO</strong></center></html>");
 		buttonStartGame.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
 		buttonStartGame.setOpaque(false);
