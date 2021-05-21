@@ -16,15 +16,17 @@ public class Console extends Panel {
 
 	Console() {
 
-		setBounds(0, 668, 1066, 100);
-		setBackground(Color.gray);
+		setBounds(0, 668, 1046, 100);
+		setBackground(new Color(58, 47, 36));
+		//setBackground(Color.gray);
+		//setBackground(new Color(90, 88, 88));
 	}
 
 	@Override
 	public void paint(Graphics g) {
 		super.paint(g);
 		try {
-			g.drawImage(ImageIO.read(getClass().getResource("/assets/console.png")), 0, -50, 1075, 200, null);
+			g.drawImage(ImageIO.read(getClass().getResource("/assets/console.png")), 0, -50, 1055, 200, null);
 		} catch (IOException e) {
 			System.out.println("ERROR: IMAGE NOT FOUND.");
 			e.printStackTrace();

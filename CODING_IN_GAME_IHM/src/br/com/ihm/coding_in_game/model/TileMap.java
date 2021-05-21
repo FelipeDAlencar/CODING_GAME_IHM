@@ -21,17 +21,13 @@ public class TileMap {
 	private int layer[][];
 	private static int mapWidht = numberColumns * tileSize;
 	private static int mapHeight = numberRows * tileSize;
-	
-	
+
 	private BufferedImage tileSet;
 	private BufferedImage map = new BufferedImage(mapWidht, mapHeight, BufferedImage.TYPE_4BYTE_ABGR);
 
 	private Graphics2D db = map.createGraphics();
 
 	public TileMap(String nameTileset, String nameMap) {
-		System.out.println(mapWidht);
-		System.out.println(mapHeight);
-
 		try {
 			tileSet = ImageIO.read(getClass().getClassLoader().getResourceAsStream(nameTileset));
 		} catch (IOException e) {
@@ -51,7 +47,7 @@ public class TileMap {
 		for (int i = 0; i < numberRows; i++) {
 			for (int j = 0; j < numberColumns; j++) {
 
-				tile = (layer[i][j] != 0) ? (layer[i][j]) : 0; // se não tiver igual o arquivo gerado ao lido
+				tile = (layer[i][j] != -1) ? (layer[i][j]) : 478; // se não tiver igual o arquivo gerado ao lido
 																	// tirar o -1
 				tileRow = (tile / columnsTileSet) | 0;
 				tileCol = (tile % columnsTileSet) | 0;

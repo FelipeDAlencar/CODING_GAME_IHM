@@ -20,7 +20,6 @@ public abstract class Sprite {
 	protected Sprite(int aparencia, int largura, int altura, int colunas, int linhas, int posX, int posY, String endereco) throws IOException {
 
 		try {
-			System.out.println(endereco);
 			this.personagem = ImageIO.read(getClass().getResource(endereco));
 			this.aparencia = aparencia;
 			this.largura = largura;
