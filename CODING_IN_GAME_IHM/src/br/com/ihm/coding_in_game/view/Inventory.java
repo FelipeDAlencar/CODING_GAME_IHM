@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.Label;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.ImageIO;
@@ -17,14 +16,13 @@ public class Inventory extends Panel {
 	public static final long serialVersionUID = 1L;
 	private BufferedImage[] imgsLife;
 	private JLabel labelMission, labelConsole, labelScore;
-	public BufferedImage imgInformationIcon, imgHelpIcon, imgCloseIcon, imgDeleteIcon, imgScoreIcon, imgMissionBoard,
-			imgButtonRun, imgButtonReset, imgConsole;
+	
 	private JButton buttonInfo, buttonHelp, buttonDelete, buttonClose, buttonExecute, buttonReset;
 
 	private boolean isInit = true;
 
 	public Inventory() {
-		setBounds(1046, 0, 320, Window.HEIGHT);
+		setBounds(1046, 0, 320, WindowMain.HEIGHT);
 		setBackground(new Color(58, 47, 36));
 
 		int x = 10, y = 20;
@@ -36,6 +34,7 @@ public class Inventory extends Panel {
 		buttonInfo.setContentAreaFilled(false);
 		buttonInfo.setBorder(null);
 		buttonInfo.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		buttonInfo.setToolTipText("<html><center><strong>INFORMAÇÕES</strong></center></html>");
 
 		x += margin;
 		buttonHelp = new JButton(new ImageIcon(getClass().getClassLoader().getResource("assets/help.png")));
@@ -43,20 +42,27 @@ public class Inventory extends Panel {
 		buttonHelp.setContentAreaFilled(false);
 		buttonHelp.setBorder(null);
 		buttonHelp.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		buttonHelp.setToolTipText("<html><center><strong>AJUDA</strong></center></html>");
 
+		
+		
 		x += margin;
 		buttonDelete = new JButton(new ImageIcon(getClass().getClassLoader().getResource("assets/delete.png")));
 		buttonDelete.setBounds(x, y, width, height);
 		buttonDelete.setContentAreaFilled(false);
 		buttonDelete.setBorder(null);
 		buttonDelete.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		buttonDelete.setToolTipText("<html><center><strong>DELETAR COMANDO</strong></center></html>");
 
+		
 		x += margin;
 		buttonClose = new JButton(new ImageIcon(getClass().getClassLoader().getResource("assets/closeapp.png")));
 		buttonClose.setBounds(x, y, width, height);
 		buttonClose.setContentAreaFilled(false);
 		buttonClose.setBorder(null);
 		buttonClose.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		buttonClose.setToolTipText("<html><center><strong>SAIR DO JOGO</strong></center></html>");
+
 
 
 		// g.drawImage(imgButtonRun, 20, 640, 106, 62, null);
@@ -136,67 +142,7 @@ public class Inventory extends Panel {
 			}
 		}
 
-		try {
-			imgInformationIcon = ImageIO.read(getClass().getResource("/assets/information.png"));
-		} catch (IOException e) {
-			System.out.println("ERROR: IMGINFORMATION NOT FOUND.");
-			e.printStackTrace();
-		}
-
-		try {
-			imgHelpIcon = ImageIO.read(getClass().getResource("/assets/help.png"));
-		} catch (IOException e) {
-			System.out.println("ERROR: IMGHELP NOT FOUND.");
-			e.printStackTrace();
-		}
-
-		try {
-			imgDeleteIcon = ImageIO.read(getClass().getResource("/assets/delete.png"));
-		} catch (IOException e) {
-			System.out.println("ERROR: IMGDELETE NOT FOUND.");
-			e.printStackTrace();
-		}
-
-		try {
-			imgCloseIcon = ImageIO.read(getClass().getResource("/assets/closeapp.png"));
-		} catch (IOException e) {
-			System.out.println("ERROR: IMGDELETE NOT FOUND.");
-			e.printStackTrace();
-		}
-
-		try {
-			imgScoreIcon = ImageIO.read(getClass().getResource("/assets/score.png"));
-		} catch (IOException e) {
-			System.out.println("ERROR: IMGSCORE NOT FOUND.");
-			e.printStackTrace();
-		}
-
-		try {
-			imgMissionBoard = ImageIO.read(getClass().getResource("/assets/mission_board.png"));
-		} catch (IOException e) {
-			System.out.println("ERROR: IMGMISSIONBOARD NOT FOUND.");
-			e.printStackTrace();
-		}
-		try {
-			imgButtonRun = ImageIO.read(getClass().getResource("/assets/button_run.png"));
-		} catch (IOException e) {
-			System.out.println("ERROR: IMGBURRONRUN NOT FOUND.");
-			e.printStackTrace();
-		}
-
-		try {
-			imgButtonReset = ImageIO.read(getClass().getResource("/assets/button_reset.png"));
-		} catch (IOException e) {
-			System.out.println("ERROR: IMGBUTTONRESET NOT FOUND.");
-			e.printStackTrace();
-		}
-
-		try {
-			imgConsole = ImageIO.read(getClass().getResource("/assets/console.png"));
-		} catch (IOException e) {
-			System.out.println("ERROR: IMGINVENTORY NOT FOUND.");
-			e.printStackTrace();
-		}
+		
 
 	}
 
@@ -225,33 +171,13 @@ public class Inventory extends Panel {
 		}
 	}
 
-	public void drawIcons(Graphics g) {
-		int x = 10, y = 20;
-		int margin = 90;
-		g.drawImage(imgInformationIcon, x, y, null);
-		x += margin;
-		g.drawImage(imgHelpIcon, x, y, null);
-		x += margin;
-		g.drawImage(imgDeleteIcon, x, y, null);
-		x += margin;
-		g.drawImage(imgCloseIcon, x, y, null);
-
-	}
 
 	public void drawScore(Graphics g) {
 		g.setColor(Color.yellow);
 		g.drawString("10", 45, 142);
 	}
 
-	public void drawnButtonRun(Graphics g) {
-		g.drawImage(imgButtonRun, 20, 640, 106, 62, null);
-	}
-
-	public void drawBtnReset(Graphics g) {
-		g.drawImage(imgButtonReset, 193, 640, 106, 62, null);
-
-	}
-
+	
 	@Override
 	public void paint(Graphics g) {
 		super.paint(g);

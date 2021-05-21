@@ -4,13 +4,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import br.com.ihm.coding_in_game.view.Inventory;
-import br.com.ihm.coding_in_game.view.Window;
+import br.com.ihm.coding_in_game.view.WindowMain;
 
 public class ControllerInventory implements ActionListener{
 	private Inventory inventory;
-	private Window window;
+	private WindowMain window;
 	
-	public ControllerInventory(Window window) {
+	public ControllerInventory(WindowMain window) {
 		
 		this.window = window;
 		this.inventory = window.getInventory();

@@ -8,19 +8,18 @@ import java.awt.event.KeyListener;
 import br.com.ihm.coding_in_game.model.Util;
 import br.com.ihm.coding_in_game.model.moveHeroThread;
 import br.com.ihm.coding_in_game.view.Phase;
-import br.com.ihm.coding_in_game.view.Window;
+import br.com.ihm.coding_in_game.view.WindowMain;
 
 public class ControllerPhase01 implements ActionListener, KeyListener {
 
 	private Phase phase;
-	private Window window;
+	private WindowMain window;
 	private moveHeroThread moveHeroThread;
 
-	public ControllerPhase01(Window window) {
+	public ControllerPhase01(WindowMain window) {
 		this.window = window;
 		this.phase = this.window.getPhase();
 		moveHeroThread = new moveHeroThread(phase.getHero());
-		System.out.println(phase.getHero());
 
 		phase.addKeyListener(this);
 	}

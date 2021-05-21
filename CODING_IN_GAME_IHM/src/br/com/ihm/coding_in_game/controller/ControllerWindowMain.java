@@ -3,13 +3,13 @@ package br.com.ihm.coding_in_game.controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import br.com.ihm.coding_in_game.view.Window;
+import br.com.ihm.coding_in_game.view.WindowMain;
 
-public class ControllerWindow implements ActionListener {
+public class ControllerWindowMain implements ActionListener {
 
-	private Window window;
+	private WindowMain window;
 	
-	public ControllerWindow(Window window) {
+	public ControllerWindowMain(WindowMain window) {
 		this.window = window;
 	}
 	

@@ -4,16 +4,21 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import br.com.ihm.coding_in_game.view.Start;
-import br.com.ihm.coding_in_game.view.Window;
+import br.com.ihm.coding_in_game.view.WindowHelp;
+import br.com.ihm.coding_in_game.view.WindowMain;
 
 public class ControllerStart implements ActionListener{
 	
 	private Start startPanel;
-	private Window window;
-	public ControllerStart(Window window) {
+	private WindowMain window;
+	private WindowHelp windowHelp;
+	private ControllerContentHelp controllerContentHelp;
+	
+	public ControllerStart(WindowMain window) {
 		this.startPanel = window.getStart();
 		this.window = window;
-		
+		windowHelp = new WindowHelp(WindowMain.WIDTH / 2, WindowMain.HEIGHT / 2);
+		controllerContentHelp =  new ControllerContentHelp(windowHelp.getContentHelp());
 		init();
 	}
 	
@@ -36,7 +41,8 @@ public class ControllerStart implements ActionListener{
 			window.getPhase().requestFocus();
 			window.getInventory().setVisible(true);
 		}else if(e.getSource() == startPanel.getjButtonHelp()) {
-			System.out.println("Help");
+			
+			windowHelp.setVisible(true);
 		}else {
 			System.out.println("Settings");
 		}

@@ -16,7 +16,7 @@ public class Start extends Panel {
 
 	public Start() {
 
-		setBounds(0, 0, Window.WIDTH, Window.HEIGHT);
+		setBounds(0, 0, WindowMain.WIDTH, WindowMain.HEIGHT);
 
 		int x = 95, y = 545;
 		int margin = 150;
@@ -65,9 +65,7 @@ public class Start extends Panel {
 
 		background = new JLabel(new ImageIcon(getClass().getClassLoader().getResource("assets/background_main.jpeg")));
 
-		System.out.println(Window.WIDTH);
-		System.out.println(Window.HEIGHT);
-		background.setBounds(0, 0, Window.WIDTH, Window.HEIGHT);
+		background.setBounds(0, 0, WindowMain.WIDTH, WindowMain.HEIGHT);
 
 		add(buttonStartGame);
 		add(buttonSettings);

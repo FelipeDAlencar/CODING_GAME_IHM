@@ -3,15 +3,10 @@ package br.com.ihm.coding_in_game.view;
 import java.awt.Graphics;
 import java.io.IOException;
 import java.util.ArrayList;
-
-import br.com.ihm.coding_in_game.model.Camera;
 import br.com.ihm.coding_in_game.model.Hero;
 import br.com.ihm.coding_in_game.model.TileMap;
 
 public class Phase extends Panel implements Runnable {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private ArrayList<TileMap> layers;
 	private TileMap layerRoadGrass, layerDoor, layerObjects, layerBomb, layerFlags;
@@ -23,7 +18,7 @@ public class Phase extends Panel implements Runnable {
 	
 	public Phase() {
 
-		setBounds(0, 0, 1046, Window.HEIGHT);
+		setBounds(0, 0, 1046, WindowMain.HEIGHT);
 		
 
 		try {
@@ -77,7 +72,7 @@ public class Phase extends Panel implements Runnable {
 		
 		for (TileMap layer : layers) {
 			layer.mountMap();
-			g.drawImage(layer.getMap(), 0, 0, 1046, Window.HEIGHT, null);
+			g.drawImage(layer.getMap(), 0, 0, 1046, WindowMain.HEIGHT, null);
 		}
 		g.drawImage(hero.getSprites()[hero.getAparence()], hero.getPosX(), hero.getPosY(), null);
 		
