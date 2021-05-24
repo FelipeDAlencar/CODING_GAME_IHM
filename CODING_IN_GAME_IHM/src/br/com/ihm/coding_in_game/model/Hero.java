@@ -10,8 +10,7 @@ public class Hero extends Sprite {
 	private boolean visible;
 	private Image image;
 	private int life;
-	public static final int VELOCITY = 2;
-	protected int posiction = 4;
+	public static final int VELOCITY = 1;
 
 	public Hero(int aparencia, int largura, int altura, int colunas, int linhas, int posX, int posY, String endereco)
 			throws IOException {
@@ -34,22 +33,18 @@ public class Hero extends Sprite {
 
 		if (direction.equals(Util.UP)) {
 			setY(getY() - VELOCITY);
-			this.posiction = 1;
 		}
 
 		if (direction.equals(Util.DOWN)) {
 			setY(getY() + VELOCITY);
-			this.posiction = 1;
 		}
 
 		if (direction.equals(Util.LEFT)) {
 			setX(getX() - VELOCITY);
-			this.posiction = 1;
 		}
 
 		if (direction.equals(Util.RIGHT)) {
 			setX(getX() + VELOCITY);
-			this.posiction = 1;
 		}
 	}
 
@@ -62,18 +57,21 @@ public class Hero extends Sprite {
 			switch (getUp()) {
 
 			case 0:
-				setAparence(3);
+				setAparence(2);
 				break;
 			case 1:
-				setAparence(7);
+				setAparence(6);
 				break;
 			case 2:
-				setAparence(11);
+				setAparence(10);
+				break;
+			case 3:
+				setAparence(14);
 				break;
 
 			}
 
-			if (getUp() == 2)
+			if (getUp() == 3)
 				setUp(0);
 			else
 				setUp(getUp() + 1);
@@ -85,18 +83,21 @@ public class Hero extends Sprite {
 			switch (getDown()) {
 
 			case 0:
-				setAparence(3);
+				setAparence(0);
 				break;
 			case 1:
-				setAparence(7);
+				setAparence(4);
 				break;
 			case 2:
-				setAparence(11);
+				setAparence(8);
+				break;
+			case 3:
+				setAparence(12);
 				break;
 
 			}
 
-			if (getDown() == 2)
+			if (getDown() == 3)
 				setDown(0);
 			else
 				setDown(getDown() + 1);
@@ -108,17 +109,20 @@ public class Hero extends Sprite {
 			switch (getLeft()) {
 
 			case 0:
-				setAparence(1);
+				setAparence(3);
 				break;
 			case 1:
-				setAparence(5);
+				setAparence(7);
 				break;
 			case 2:
-				setAparence(9);
+				setAparence(11);
+				break;
+			case 3:
+				setAparence(15);
 				break;
 
 			}
-			if (getLeft() == 2)
+			if (getLeft() == 3)
 				setLeft(0);
 			else
 				setLeft(getLeft() + 1);
@@ -127,8 +131,8 @@ public class Hero extends Sprite {
 
 		if (direction.equals(Util.RIGHT)) {
 
+			System.out.println(getRight());
 			switch (getRight()) {
-
 			case 0:
 				setAparence(1);
 				break;
@@ -138,9 +142,11 @@ public class Hero extends Sprite {
 			case 2:
 				setAparence(9);
 				break;
-
+			case 3:
+				setAparence(13);
+				break;
 			}
-			if (getRight() == 2)
+			if (getRight() == 3)
 				setRight(0);
 			else
 				setRight(getRight() + 1);

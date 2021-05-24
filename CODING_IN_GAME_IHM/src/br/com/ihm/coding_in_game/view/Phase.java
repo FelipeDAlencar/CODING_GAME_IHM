@@ -22,7 +22,7 @@ public class Phase extends Panel implements Runnable {
 		
 
 		try {
-			hero = new Hero(1, 272, 256, 18, 8, 30, 370, "/" + basePathTileSet + "character.png");
+			hero = new Hero(1, 64, 126, 4, 4, 30, 370, "/assets/sprite.png");
 		} catch (IOException e) {
 			System.out.println("ERRO HERO NOT FOUND.");
 			e.printStackTrace();

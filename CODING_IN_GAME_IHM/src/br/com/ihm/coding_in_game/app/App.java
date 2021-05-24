@@ -8,7 +8,7 @@ import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.UnsupportedLookAndFeelException;
 
 import br.com.ihm.coding_in_game.controller.ControllerInventory;
-import br.com.ihm.coding_in_game.controller.ControllerPhase01;
+import br.com.ihm.coding_in_game.controller.ControllerPhase;
 import br.com.ihm.coding_in_game.controller.ControllerStart;
 import br.com.ihm.coding_in_game.view.WindowMain;
 
@@ -44,7 +44,7 @@ public class App {
 		
 		@SuppressWarnings("unused")
 		ControllerStart controllerStart = new ControllerStart(window);
-		ControllerPhase01 controllerPhase01 = new ControllerPhase01(window);
+		ControllerPhase controllerPhase01 = new ControllerPhase(window);
 		ControllerInventory controllerInventory = new ControllerInventory(window);
 		
 		

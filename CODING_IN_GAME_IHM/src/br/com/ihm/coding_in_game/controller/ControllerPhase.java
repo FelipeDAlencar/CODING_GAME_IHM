@@ -10,13 +10,13 @@ import br.com.ihm.coding_in_game.model.moveHeroThread;
 import br.com.ihm.coding_in_game.view.Phase;
 import br.com.ihm.coding_in_game.view.WindowMain;
 
-public class ControllerPhase01 implements ActionListener, KeyListener {
+public class ControllerPhase implements ActionListener, KeyListener {
 
 	private Phase phase;
 	private WindowMain window;
 	private moveHeroThread moveHeroThread;
 
-	public ControllerPhase01(WindowMain window) {
+	public ControllerPhase(WindowMain window) {
 		this.window = window;
 		this.phase = this.window.getPhase();
 		moveHeroThread = new moveHeroThread(phase.getHero());
