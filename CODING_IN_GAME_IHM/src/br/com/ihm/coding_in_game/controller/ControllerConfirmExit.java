@@ -20,6 +20,7 @@ public class ControllerConfirmExit implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == confirmExit.getButtonClose()) {
 			confirmExit.getWindow().setVisible(false);
+			confirmExit.setVisible(false);
 		} else {
 			System.exit(0);
 		}

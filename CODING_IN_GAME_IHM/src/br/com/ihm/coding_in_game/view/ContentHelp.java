@@ -25,8 +25,8 @@ public class ContentHelp extends Panel {
 
 		labelTitle = new JLabel("<html><center><strong>AJUDA</strong></center></html>");
 		labelTitle.setForeground(new Color(61, 57, 57));
-		labelTitle.setFont(new Font("Arial Bold", Font.BOLD, 50));
-		labelTitle.setBounds(255, -25, 200, 100);
+		labelTitle.setFont(new Font("Arial Bold", Font.BOLD, 40));
+		labelTitle.setBounds(280, -25, 200, 100);
 
 		labelContent = new JLabel(
 				"<html><center><strong>Vídeo-tutorial de ajuda no link a seguir:</strong></center></html>");
@@ -50,7 +50,7 @@ public class ContentHelp extends Panel {
 		buttonClose.setBorder(null);
 		buttonClose.setBounds(320, 320, 50, 52);
 		buttonClose.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		buttonClose.setToolTipText("<html><center><strong>FECHAR</strong></center></html>");
+		buttonClose.setToolTipText("<html><center><strong>CANCELAR</strong></center></html>");
 
 		this.window = window;
 

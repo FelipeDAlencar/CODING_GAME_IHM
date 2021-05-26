@@ -25,8 +25,8 @@ public class ConfirmExit extends Panel{
 
 		labelTitle = new JLabel("<html><center><strong>SAIR</strong></center></html>");
 		labelTitle.setForeground(new Color(61, 57, 57));
-		labelTitle.setFont(new Font("Arial Bold", Font.BOLD, 50));
-		labelTitle.setBounds(255, -25, 200, 100);
+		labelTitle.setFont(new Font("Arial Bold", Font.BOLD, 40));
+		labelTitle.setBounds(290, -25, 200, 100);
 
 		labelContent = new JLabel(
 				"<html><center><strong>Deseja realmente sair?</strong></center></html>");

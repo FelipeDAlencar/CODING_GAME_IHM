@@ -26,7 +26,8 @@ public class ControllerContentHelp implements ActionListener, MouseListener {
 
 		if (e.getSource() == contentHelp.getButtonClose()) {
 			contentHelp.getWindow().setVisible(false);
-			//System.exit(0);
+			contentHelp.setVisible(false);
+			// System.exit(0);
 		}
 
 	}

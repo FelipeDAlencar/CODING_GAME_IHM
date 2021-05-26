@@ -15,23 +15,23 @@ public abstract class Sprite {
 	protected int up, down, left, right;
 	private String direction;
 
-	protected Sprite(int aparencia, int largura, int altura, int colunas, int linhas, int posX, int posY, String endereco) throws IOException {
+	protected Sprite(int aparence, int width, int height, int cols, int rows, int posX, int posY, String path) throws IOException {
 
 		try {
-			this.hero = ImageIO.read(getClass().getResource(endereco));
-			this.aparence = aparencia;
-			this.width = largura;
-			this.height = altura;
+			this.hero = ImageIO.read(getClass().getResource(path));
+			this.aparence = aparence;
+			this.width = width;
+			this.height = height;
 
-			this.rows = colunas;
-			this.cols = linhas;
+			this.rows = cols;
+			this.cols = rows;
 			this.posX = posX;
 			this.posY = posY;
 
-			sprites = new BufferedImage[colunas * linhas];
-			for (int i = 0; i < colunas; i++) {
-				for (int j = 0; j < linhas; j++) {
-					sprites[(i * linhas) + j] = hero.getSubimage(i* (largura / colunas), j * (altura / linhas), largura / colunas, altura / linhas);
+			sprites = new BufferedImage[cols * rows];
+			for (int i = 0; i < cols; i++) {
+				for (int j = 0; j < rows; j++) {
+					sprites[(i * rows) + j] = hero.getSubimage(i* (width / cols), j * (height / rows), width / cols, height / rows);
 				}
 			}
 		} catch (IOException e) {

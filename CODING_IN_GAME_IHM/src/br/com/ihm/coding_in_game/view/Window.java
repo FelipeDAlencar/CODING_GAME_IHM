@@ -1,5 +1,8 @@
 package br.com.ihm.coding_in_game.view;
 
+import java.awt.Image;
+import java.awt.Toolkit;
+
 import javax.swing.JFrame;
 
 public class Window extends JFrame {
@@ -10,12 +13,16 @@ public class Window extends JFrame {
 	public Window(int width, int height) {
 		this.setWidth(width);
 		this.setHeight(height);
-		
+
 		setSize(width, height);
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
 		setUndecorated(true);
+
+		Image icon = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/assets/iconApp.png"));
+		this.setIconImage(icon);
+
 	}
 
 	public int getWidth() {
