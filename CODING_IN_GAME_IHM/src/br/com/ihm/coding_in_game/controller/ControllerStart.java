@@ -16,14 +16,14 @@ public class ControllerStart implements ActionListener {
 	private ControllerConfirmExit controllerConfirmExit;
 	private ControllerSettings controllerSettings;
 
-	public ControllerStart(WindowMain window) {
-		this.startPanel = window.getStart();
-		this.windowMain = window;
-		windowDialog = new WindowDialog(WindowMain.WIDTH / 2, WindowMain.HEIGHT / 2);
+	public ControllerStart(WindowMain windowMain, WindowDialog windowDialog) {
+		this.startPanel = windowMain.getStart();
+		this.windowMain = windowMain;
+		this.windowDialog = windowDialog;
 		controllerContentHelp = new ControllerContentHelp(windowDialog.getContentHelp());
 		controllerConfirmExit = new ControllerConfirmExit(windowDialog.getConfirmExit());
 		controllerSettings = new ControllerSettings(windowDialog.getSettings());
-		
+
 		init();
 	}
 
@@ -38,21 +38,24 @@ public class ControllerStart implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 
 		if (e.getSource() == startPanel.getjButtonClose()) {
+
 			windowDialog.getConfirmExit().setVisible(true);
 			windowDialog.setVisible(true);
+			windowMain.setEnabled(false);
+
 		} else if (e.getSource() == startPanel.getjButtonStartGame()) {
 			windowMain.getStart().setVisible(false);
-			windowMain.getPhase().setVisible(true);
-			windowMain.getPhase().requestFocus();
-			windowMain.getInventory().setVisible(true);
+			windowMain.getChoicePhases().setVisible(true);
 		} else if (e.getSource() == startPanel.getjButtonHelp()) {
 			windowDialog.getContentHelp().setVisible(true);
-			
 			windowDialog.setVisible(true);
+			windowMain.setEnabled(false);
 		} else {
+			windowMain.setEnabled(false);
 			windowDialog.getSettings().setVisible(true);
 			windowDialog.setVisible(true);
 			
+
 		}
 
 	}

@@ -1,6 +1,7 @@
 package br.com.ihm.coding_in_game.model;
 
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -10,6 +11,8 @@ import java.util.ArrayList;
 import java.util.StringTokenizer;
 
 import javax.imageio.ImageIO;
+
+import br.com.ihm.coding_in_game.view.WindowMain;
 
 public class TileMap {
 
@@ -22,12 +25,19 @@ public class TileMap {
 	private static int mapWidht = numberColumns * tileSize;
 	private static int mapHeight = numberRows * tileSize;
 
+	private int newTileWidth = (int) (Math.ceil((1046.0 / numberColumns)));
+	private int newTileHeight = (int) (Math.ceil((double) WindowMain.HEIGHT / numberRows));
+
 	private BufferedImage tileSet;
 	private BufferedImage map = new BufferedImage(mapWidht, mapHeight, BufferedImage.TYPE_4BYTE_ABGR);
 
 	private Graphics2D db = map.createGraphics();
 
+	private ArrayList<Rectangle> barriersInterceptions;
+
 	public TileMap(String nameTileset, String nameMap) {
+		barriersInterceptions = new ArrayList<Rectangle>();
+
 		try {
 			tileSet = ImageIO.read(getClass().getClassLoader().getResourceAsStream(nameTileset));
 		} catch (IOException e) {
@@ -54,10 +64,23 @@ public class TileMap {
 				db.drawImage(tileSet, (j * tileSize), (i * tileSize), (j * tileSize) + tileSize,
 						(i * tileSize) + tileSize, (tileCol * tileSize), (tileRow * tileSize),
 						(tileCol * tileSize) + tileSize, (tileRow * tileSize) + tileSize, null);
+				if (tile != 478)
+					// barriersInterceptions.add(new Rectangle((j * tileSize), (i * tileSize),
+					// tileSize, tileSize));
+					addBarrieInterception(i, j, newTileWidth, newTileHeight);
 			}
 
 		}
 
+	}
+
+	public void addBarrieInterception(int i, int j, int newTileWidth, int newTileHeight) {
+		Rectangle barrieInterception = new Rectangle();
+		barrieInterception.x = j * newTileWidth;
+		barrieInterception.y = i * newTileHeight;
+		barrieInterception.width = newTileWidth;
+		barrieInterception.height = newTileHeight;
+		barriersInterceptions.add(barrieInterception);
 	}
 
 	public int[][] loadMatrix(String nomeMapa) {
@@ -156,6 +179,14 @@ public class TileMap {
 
 	public static int getTilesize() {
 		return tileSize;
+	}
+
+	public ArrayList<Rectangle> getBarriersInterceptions() {
+		return barriersInterceptions;
+	}
+
+	public void setBarriersInterceptions(ArrayList<Rectangle> barriersInterceptions) {
+		this.barriersInterceptions = barriersInterceptions;
 	}
 
 }

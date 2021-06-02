@@ -7,9 +7,11 @@ import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.UnsupportedLookAndFeelException;
 
+import br.com.ihm.coding_in_game.controller.ControllerChoicePhases;
 import br.com.ihm.coding_in_game.controller.ControllerInventory;
 import br.com.ihm.coding_in_game.controller.ControllerPhase;
 import br.com.ihm.coding_in_game.controller.ControllerStart;
+import br.com.ihm.coding_in_game.view.WindowDialog;
 import br.com.ihm.coding_in_game.view.WindowMain;
 
 public class App {
@@ -40,13 +42,14 @@ public class App {
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		int width = (int) screenSize.getWidth();
 		int height = (int) screenSize.getHeight();
-		WindowMain window = new WindowMain(width, height);
+		WindowMain windowMain = new WindowMain(width, height);
+		WindowDialog windowDialog = new WindowDialog(WindowMain.WIDTH / 2, WindowMain.HEIGHT / 2, windowMain);
 		
 		@SuppressWarnings("unused")
-		ControllerStart controllerStart = new ControllerStart(window);
-		ControllerPhase controllerPhase01 = new ControllerPhase(window);
-		ControllerInventory controllerInventory = new ControllerInventory(window);
-		
+		ControllerStart controllerStart = new ControllerStart(windowMain, windowDialog);
+		ControllerPhase controllerPhase01 = new ControllerPhase(windowMain);
+		ControllerInventory controllerInventory = new ControllerInventory(windowDialog);
+		ControllerChoicePhases controllerChoicePhases = new ControllerChoicePhases(windowMain, windowDialog);
 		
 	}
 

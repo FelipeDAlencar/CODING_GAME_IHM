@@ -12,6 +12,8 @@ public class Hero extends Sprite {
 	private int life;
 	public static final int VELOCITY = 1;
 
+	private boolean intersectsObjects;
+
 	public Hero(int aparencia, int largura, int altura, int colunas, int linhas, int posX, int posY, String endereco)
 			throws IOException {
 		super(aparencia, largura, altura, colunas, linhas, posX, posY, endereco);
@@ -25,26 +27,28 @@ public class Hero extends Sprite {
 	}
 
 	public void moveHero(int dx, int dy, String direction) {
+		if (!intersectsObjects) {
 
-		setPosX(getPosX() + dx);
-		setPosY(getPosY() + dy);
-		
-		
+			setPosX(getPosX() + dx);
+			setPosY(getPosY() + dy);
 
-		if (direction.equals(Util.UP)) {
-			setY(getY() - VELOCITY);
-		}
+			if (direction.equals(Util.UP)) {
+				setY(getY() - VELOCITY);
+			}
 
-		if (direction.equals(Util.DOWN)) {
-			setY(getY() + VELOCITY);
-		}
+			if (direction.equals(Util.DOWN)) {
+				setY(getY() + VELOCITY);
+			}
 
-		if (direction.equals(Util.LEFT)) {
-			setX(getX() - VELOCITY);
-		}
+			if (direction.equals(Util.LEFT)) {
+				setX(getX() - VELOCITY);
+			}
 
-		if (direction.equals(Util.RIGHT)) {
-			setX(getX() + VELOCITY);
+			if (direction.equals(Util.RIGHT)) {
+				setX(getX() + VELOCITY);
+			}
+		}else {
+			System.out.println("Entrou aqui");
 		}
 	}
 
@@ -131,7 +135,6 @@ public class Hero extends Sprite {
 
 		if (direction.equals(Util.RIGHT)) {
 
-			System.out.println(getRight());
 			switch (getRight()) {
 			case 0:
 				setAparence(1);
@@ -157,6 +160,7 @@ public class Hero extends Sprite {
 
 	public void draw(Graphics g) {
 		g.drawImage(getSprites()[getAparence()], getPosX(), getPosY(), null);
+		g.drawRect(getPosX(), getPosY(), getWidth() / getCols(), getHeight() / getRows());
 	}
 
 	public Rectangle getBounds() {
@@ -202,6 +206,14 @@ public class Hero extends Sprite {
 
 	public void setLife(int life) {
 		this.life = life;
+	}
+
+	public boolean isIntersectsObjects() {
+		return intersectsObjects;
+	}
+
+	public void setIntersectsObjects(boolean intersectsObjects) {
+		this.intersectsObjects = intersectsObjects;
 	}
 
 }

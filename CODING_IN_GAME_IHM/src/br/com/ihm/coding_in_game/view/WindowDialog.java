@@ -4,46 +4,71 @@ import java.awt.Color;
 
 public class WindowDialog extends Window {
 	private static final long serialVersionUID = 1L;
-	private ContentHelp contentHelp;
-	private ConfirmExit confirmExit;
-	private Settings settings;
+	private ContentHelpDialog contentHelp;
+	private ConfirmExitDialog confirmExit;
+	private SettingsDialog settings;
+	private GeneralContentDialog generalContentDialog;
+	private WindowMain windowParent;
 
-	public WindowDialog(int width, int height) {
+	public WindowDialog(int width, int height, WindowMain windowParent) {
 		super(width, height);
 		setBackground(new Color(0, 0, 0, 0));
-		contentHelp = new ContentHelp(this);
-		confirmExit = new ConfirmExit(this);
-		settings = new Settings(this);
+
+		contentHelp = new ContentHelpDialog(this);
+		confirmExit = new ConfirmExitDialog(this);
+		settings = new SettingsDialog(this);
+
+		generalContentDialog = new GeneralContentDialog(this);
+
+		this.windowParent = windowParent;
 
 		add(contentHelp);
 		add(confirmExit);
 		add(settings);
+		add(generalContentDialog);
+		
 		setVisible(false);
 
 	}
 
-	public ContentHelp getContentHelp() {
+	public WindowMain getWindowParent() {
+		return windowParent;
+	}
+
+	public void setWindowParent(WindowMain windowParent) {
+		this.windowParent = windowParent;
+	}
+
+	public ContentHelpDialog getContentHelp() {
 		return contentHelp;
 	}
 
-	public void setContentHelp(ContentHelp contentHelp) {
+	public void setContentHelp(ContentHelpDialog contentHelp) {
 		this.contentHelp = contentHelp;
 	}
 
-	public ConfirmExit getConfirmExit() {
+	public ConfirmExitDialog getConfirmExit() {
 		return confirmExit;
 	}
 
-	public void setConfirmExit(ConfirmExit confirmExit) {
+	public void setConfirmExit(ConfirmExitDialog confirmExit) {
 		this.confirmExit = confirmExit;
 	}
 
-	public Settings getSettings() {
+	public SettingsDialog getSettings() {
 		return settings;
 	}
 
-	public void setSettings(Settings settings) {
+	public void setSettings(SettingsDialog settings) {
 		this.settings = settings;
+	}
+
+	public GeneralContentDialog getGeneralContentDialog() {
+		return generalContentDialog;
+	}
+
+	public void setGeneralContentDialog(GeneralContentDialog generalContentDialog) {
+		this.generalContentDialog = generalContentDialog;
 	}
 
 }

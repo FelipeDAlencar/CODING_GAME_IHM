@@ -8,14 +8,14 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
-public class ContentHelp extends Panel {
+public class ContentHelpDialog extends Panel {
 
 	private static final long serialVersionUID = 1L;
 	private JLabel labelBackground, labelTitle, labelContent, labelLink;
 	private JButton buttonClose;
-	private Window window;
+	private WindowDialog windowDialog;
 
-	public ContentHelp(Window window) {
+	public ContentHelpDialog(WindowDialog windowDialog) {
 
 		setBounds(0, 0, 683, 384);
 		setBackground(new Color(0, 0, 0, 0));
@@ -33,18 +33,15 @@ public class ContentHelp extends Panel {
 		labelContent.setForeground(new Color(61, 57, 57));
 		labelContent.setFont(new Font("Arial Bold", Font.BOLD, 30));
 		labelContent.setBounds(60, 60, 600, 100);
-		
-		
-		
+
 		labelLink = new JLabel("<html><center><strong>https://www.youtube.com/</strong></center></html>");
 		labelLink.setForeground(new Color(61, 57, 57));
 		labelLink.setFont(new Font("Arial Bold", Font.BOLD, 30));
 		labelLink.setBounds(60, 120, 400, 100);
 		labelLink.setToolTipText("<html><center><strong>Clique para ser levado ao vídeo</strong></center></html>");
-		labelLink.setCursor(new Cursor(Cursor.HAND_CURSOR));		
+		labelLink.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		labelLink.setBackground(Color.red);
-		
-		
+
 		buttonClose = new JButton(new ImageIcon(getClass().getClassLoader().getResource("assets/closeapp.png")));
 		buttonClose.setContentAreaFilled(false);
 		buttonClose.setBorder(null);
@@ -52,15 +49,14 @@ public class ContentHelp extends Panel {
 		buttonClose.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		buttonClose.setToolTipText("<html><center><strong>CANCELAR</strong></center></html>");
 
-		this.window = window;
+		this.windowDialog = windowDialog;
 
 		add(labelTitle);
 		add(labelContent);
 		add(labelLink);
 		add(buttonClose);
 		add(labelBackground);
-		
-		
+
 		setVisible(false);
 	}
 
@@ -80,12 +76,12 @@ public class ContentHelp extends Panel {
 		this.buttonClose = buttonClose;
 	}
 
-	public Window getWindow() {
-		return window;
+	public WindowDialog getWindowDialog() {
+		return windowDialog;
 	}
 
-	public void setWindow(Window window) {
-		this.window = window;
+	public void setWindowDialog(WindowDialog windowDialog) {
+		this.windowDialog = windowDialog;
 	}
 
 	public JLabel getLabelTitle() {
@@ -111,9 +107,5 @@ public class ContentHelp extends Panel {
 	public void setLabelBackground(JLabel labelBackground) {
 		this.labelBackground = labelBackground;
 	}
-	
-	
-	
-	
 
 }

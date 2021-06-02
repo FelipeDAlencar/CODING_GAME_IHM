@@ -14,9 +14,9 @@ public abstract class Game extends Panel implements Runnable {
 	protected Graphics2D g;
 	Thread thread;
 
-	public Game() throws IOException {
+	public Game()  {
 
-		image = new BufferedImage(largura, altura, BufferedImage.TYPE_INT_RGB);
+		image = new BufferedImage(1046, WindowMain.HEIGHT, BufferedImage.TYPE_INT_RGB);
 		g = (Graphics2D) image.getGraphics();
 	}
 
@@ -39,7 +39,6 @@ public abstract class Game extends Panel implements Runnable {
 					gameDraw();
 				}
 				Thread.sleep(5);
-
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -57,9 +56,9 @@ public abstract class Game extends Panel implements Runnable {
 	public abstract void init() throws IOException;
 
 	private void gameDraw() {
-		Graphics2D g2 = (Graphics2D) this.getGraphics();
-		g2.drawImage(image, 0, 0, null);
-		g2.dispose();
+		//Graphics2D g2 = (Graphics2D) this.getGraphics();
+		//g2.drawImage(image, 0, 0, null);
+		//g2.dispose();
 	}
 
 	public static void destroyer(Object object) {

@@ -10,17 +10,17 @@ import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JSlider;
 
-public class Settings extends Panel {
+public class SettingsDialog extends Panel {
 
 	private static final long serialVersionUID = 1L;
 	private JLabel labelBackground, labelTitle, labelSound, labelVelocity;
 	private JButton buttonCancel, buttonConfirm;
 	private JSlider sliderVelocity;
 	private JCheckBox checkBoxSound;
-	private Window window;
+	private WindowDialog windowDialog;
 
-	public Settings(Window window) {
-		this.window = window;
+	public SettingsDialog(WindowDialog windowDialog) {
+		this.windowDialog = windowDialog;
 
 		setBounds(0, 0, 683, 384);
 		setBackground(new Color(0, 0, 0, 0));
@@ -61,14 +61,14 @@ public class Settings extends Panel {
 		buttonCancel = new JButton(new ImageIcon(getClass().getClassLoader().getResource("assets/closeapp.png")));
 		buttonCancel.setContentAreaFilled(false);
 		buttonCancel.setBorder(null);
-		buttonCancel.setBounds(340, 320, 50, 52);
+		buttonCancel.setBounds(360, 320, 50, 52);
 		buttonCancel.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		buttonCancel.setToolTipText("<html><center><strong>CANCELAR</strong></center></html>");
 
 		buttonConfirm = new JButton(new ImageIcon(getClass().getClassLoader().getResource("assets/done.png")));
 		buttonConfirm.setContentAreaFilled(false);
 		buttonConfirm.setBorder(null);
-		buttonConfirm.setBounds(260, 320, 50, 52);
+		buttonConfirm.setBounds(280, 320, 50, 52);
 		buttonConfirm.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		buttonConfirm.setToolTipText("<html><center><strong>CONFIRMAR</strong></center></html>");
 
@@ -133,12 +133,14 @@ public class Settings extends Panel {
 		this.buttonConfirm = buttonConfirm;
 	}
 
-	public Window getWindow() {
-		return window;
+	
+
+	public WindowDialog getWindowDialog() {
+		return windowDialog;
 	}
 
-	public void setWindow(Window window) {
-		this.window = window;
+	public void setWindowDialog(WindowDialog windowDialog) {
+		this.windowDialog = windowDialog;
 	}
 
 	public JSlider getSliderVelocity() {

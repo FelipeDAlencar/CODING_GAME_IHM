@@ -7,7 +7,8 @@ import java.awt.event.KeyListener;
 public class WindowMain extends Window implements KeyListener {
 	public static int WIDTH, HEIGHT;
 	private Inventory inventory;
-	private Phase phase;
+	private Phase_01 phase;
+	private ChoicePhases choicePhases;
 	private Start start;
 	
 	private static final long serialVersionUID = 1L;
@@ -20,8 +21,9 @@ public class WindowMain extends Window implements KeyListener {
 
 		// Instantiation views
 		inventory = new Inventory();
-		phase = new Phase();
+		phase = new Phase_01();
 		start = new Start();
+		choicePhases = new ChoicePhases();
 
 		// Add key listenner
 		addKeyListener(this);
@@ -29,6 +31,7 @@ public class WindowMain extends Window implements KeyListener {
 		add(inventory);
 		add(phase);
 		add(start);
+		add(choicePhases);
 
 		setVisible(true);
 
@@ -65,12 +68,18 @@ public class WindowMain extends Window implements KeyListener {
 		this.inventory = inventory;
 	}
 
-	public Phase getPhase() {
+	
+
+	public Phase_01 getPhase() {
 		return phase;
 	}
 
-	public void setPhase(Phase phase) {
+	public void setPhase(Phase_01 phase) {
 		this.phase = phase;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 	public Start getStart() {
@@ -80,5 +89,15 @@ public class WindowMain extends Window implements KeyListener {
 	public void setStart(Start start) {
 		this.start = start;
 	}
+
+	public ChoicePhases getChoicePhases() {
+		return choicePhases;
+	}
+
+	public void setChoicePhases(ChoicePhases choicePhases) {
+		this.choicePhases = choicePhases;
+	}
+	
+	
 
 }

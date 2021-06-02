@@ -17,7 +17,7 @@ public class moveHeroThread extends Thread {
 		while (true) {
 			try {
 				moveHero(move);
-				sleep(15);
+				sleep(5);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

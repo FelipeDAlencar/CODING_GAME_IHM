@@ -9,12 +9,12 @@ import java.awt.event.MouseListener;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-import br.com.ihm.coding_in_game.view.ContentHelp;
+import br.com.ihm.coding_in_game.view.ContentHelpDialog;
 
 public class ControllerContentHelp implements ActionListener, MouseListener {
-	private ContentHelp contentHelp;
+	private ContentHelpDialog contentHelp;
 
-	public ControllerContentHelp(ContentHelp contentHelp) {
+	public ControllerContentHelp(ContentHelpDialog contentHelp) {
 		this.contentHelp = contentHelp;
 
 		this.contentHelp.getButtonClose().addActionListener(this);
@@ -25,8 +25,10 @@ public class ControllerContentHelp implements ActionListener, MouseListener {
 	public void actionPerformed(ActionEvent e) {
 
 		if (e.getSource() == contentHelp.getButtonClose()) {
-			contentHelp.getWindow().setVisible(false);
 			contentHelp.setVisible(false);
+			contentHelp.getWindowDialog().getWindowParent().setEnabled(true);
+			contentHelp.getWindowDialog().setVisible(false);
+			
 			// System.exit(0);
 		}
 

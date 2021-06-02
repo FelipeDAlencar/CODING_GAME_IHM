@@ -8,12 +8,12 @@ import java.awt.event.KeyListener;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import br.com.ihm.coding_in_game.view.Settings;
+import br.com.ihm.coding_in_game.view.SettingsDialog;
 
 public class ControllerSettings implements ActionListener, KeyListener, ChangeListener {
-	private Settings settings;
+	private SettingsDialog settings;
 
-	public ControllerSettings(Settings settings) {
+	public ControllerSettings(SettingsDialog settings) {
 		this.settings = settings;
 
 		this.settings.addKeyListener(this);
@@ -27,8 +27,10 @@ public class ControllerSettings implements ActionListener, KeyListener, ChangeLi
 	public void keyPressed(KeyEvent e) {
 		int code = e.getKeyCode();
 		if (code == KeyEvent.VK_ESCAPE) {
-			settings.getWindow().setVisible(false);
 			settings.setVisible(false);
+			settings.getWindowDialog().setVisible(false);
+			settings.getWindowDialog().getWindowParent().setEnabled(true);
+			
 			System.exit(0);
 		}
 
@@ -37,12 +39,13 @@ public class ControllerSettings implements ActionListener, KeyListener, ChangeLi
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == settings.getButtonConfirm()) {
-			System.out.println(settings.getSliderVelocity().getValue());
-			settings.getWindow().setVisible(false);
 			settings.setVisible(false);
+			settings.getWindowDialog().getWindowParent().setEnabled(true);
+			settings.getWindowDialog().setVisible(false);
 		} else if (e.getSource() == settings.getButtonCancel()) {
-			settings.getWindow().setVisible(false);
 			settings.setVisible(false);
+			settings.getWindowDialog().getWindowParent().setEnabled(true);
+			settings.getWindowDialog().setVisible(false);
 		} else if (e.getSource() == settings.getCheckBoxSound()) {
 			System.out.println(settings.getCheckBoxSound().isSelected());
 		}
