@@ -1,9 +1,13 @@
 package br.com.ihm.coding_in_game.model;
 
+import java.util.Arrays;
+
 public class moveHeroThread extends Thread {
 	private Hero hero;
 	private int dx = 0, dy = 0;
-	private String move = "";
+	private int move = 4;
+	private String[] comands;
+	private int index;
 
 	public moveHeroThread(Hero hero) {
 		this.hero = hero;
@@ -17,7 +21,9 @@ public class moveHeroThread extends Thread {
 		while (true) {
 			try {
 				moveHero(move);
-				sleep(5);
+				iteratorComands();
+				sleep(4);
+
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -26,27 +32,48 @@ public class moveHeroThread extends Thread {
 
 	}
 
-	public void moveHero(String direction) {
-		switch (direction) {
-		case "up":
-			dy = -Hero.VELOCITY;
-			dx = 0;
-			updateMoveHero(direction);
+	public void moveHero(int posiction) throws InterruptedException {
+		switch (posiction) {
+		case Util.POSICTION_UP:
+			if (hero.getPosY() != hero.getFutureY()) {
+				dy = -Hero.VELOCITY;
+				dx = 0;
+				updateMoveHero("up");
+			} else {
+				move = 4;
+				hero.setInMove(false);
+			}
 			break;
-		case "down":
-			dy = Hero.VELOCITY;
-			dx = 0;
-			updateMoveHero(direction);
+		case Util.POSICTION_DOWN:
+			if (hero.getPosY() != hero.getFutureY()) {
+				dy = Hero.VELOCITY;
+				dx = 0;
+				updateMoveHero("down");
+			} else {
+				move = 4;
+				hero.setInMove(false);
+			}
 			break;
-		case "left":
-			dx = -Hero.VELOCITY;
-			dy = 0;
-			updateMoveHero(direction);
+		case Util.POSICTION_LEFT:
+			if (hero.getPosX() != hero.getFutureX()) {
+				dx = -Hero.VELOCITY;
+				dy = 0;
+				updateMoveHero("left");
+			} else {
+				move = 4;
+				hero.setInMove(false);
+			}
 			break;
-		case "right":
-			dx = Hero.VELOCITY;
-			dy = 0;
-			updateMoveHero(direction);
+		case Util.POSICTION_RIGHT:
+			if (hero.getPosX() != hero.getFutureX()) {
+
+				dx = Hero.VELOCITY;
+				dy = 0;
+				updateMoveHero("right");
+			} else {
+				move = 4;
+				hero.setInMove(false);
+			}
 			break;
 
 		default:
@@ -55,9 +82,42 @@ public class moveHeroThread extends Thread {
 
 	}
 
-	public void updateMoveHero(String direction) {
+	public void updateMoveHero(String direction) throws InterruptedException {
 		hero.moveHero(dx, dy, direction);
 		hero.animate(direction);
+	}
+
+	public void iteratorComands() throws InterruptedException {
+		int temp = 200;
+		if ((comands != null) && comands.length != 0) {
+			if (!hero.isInMove()) {
+				while (index < comands.length) {
+					if (comands[index].trim().equalsIgnoreCase(Util.METHOD_MOVE_FRONT)) {
+						hero.calculateFutureXY();
+						move = hero.getPosiction();
+						hero.setInMove(true);
+						index++;
+						break; // PAREI AQUI
+					} else if (comands[index].trim().equalsIgnoreCase(Util.METHOD_TURN_RIGHT)) {
+						hero.changeAparencePosiction(Util.METHOD_TURN_RIGHT);
+						sleep(temp);
+					} else if (comands[index].trim().equalsIgnoreCase(Util.METHOD_TURN_LEFT)) {
+						hero.changeAparencePosiction(Util.METHOD_TURN_LEFT);
+						sleep(temp);
+					} else {
+						System.out.println("Entrou em nenhum");
+					}
+					if ((index + 1) >= comands.length) {
+						comands = null;
+						break;
+					} else {
+						index++;
+					}
+				}
+
+			}
+		}
+
 	}
 
 	public Hero getHero() {
@@ -84,15 +144,28 @@ public class moveHeroThread extends Thread {
 		this.dy = dy;
 	}
 
-	public String getMove() {
+	public int getMove() {
 		return move;
 	}
 
-	public void setMove(String move) {
+	public void setMove(int move) {
 		this.move = move;
 	}
-	
-	
-	
+
+	public String[] getComands() {
+		return comands;
+	}
+
+	public void setComands(String[] comands) {
+		this.comands = comands;
+	}
+
+	public int getIndex() {
+		return index;
+	}
+
+	public void setIndex(int index) {
+		this.index = index;
+	}
 
 }

@@ -43,8 +43,8 @@ public class ControllerChoicePhases implements ActionListener {
 			windowMain.getChoicePhases().setVisible(false);
 		} else if (e.getSource() == choicePhases.getButtonPhase1()) {
 			windowMain.getStart().setVisible(false);
-			windowMain.getPhase().setVisible(true);
-			windowMain.getPhase().requestFocus();
+			windowMain.getPhase01().setVisible(true);
+			windowMain.getPhase01().requestFocus();
 			windowMain.getInventory().setVisible(true);
 			windowMain.getChoicePhases().setVisible(false);
 

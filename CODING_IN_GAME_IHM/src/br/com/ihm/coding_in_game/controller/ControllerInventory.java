@@ -6,7 +6,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import br.com.ihm.coding_in_game.model.Hero;
 import br.com.ihm.coding_in_game.model.Util;
+import br.com.ihm.coding_in_game.model.moveHeroThread;
 import br.com.ihm.coding_in_game.view.Inventory;
 import br.com.ihm.coding_in_game.view.WindowDialog;
 import br.com.ihm.coding_in_game.view.WindowMain;
@@ -18,6 +20,7 @@ public class ControllerInventory implements ActionListener, MouseListener {
 	private ControllerGeneralContentDialog contentDialog;
 	private String contentConsole;
 	private String initialHTML, finalHTML;
+	private moveHeroThread moveHeroThread;
 
 	public ControllerInventory(WindowDialog windowDialog) {
 
@@ -46,6 +49,8 @@ public class ControllerInventory implements ActionListener, MouseListener {
 
 		initialHTML = "<html>";
 		finalHTML = "</html>";
+
+		moveHeroThread = new moveHeroThread(windowMain.getPhase01().getHero());
 
 	}
 
@@ -85,14 +90,37 @@ public class ControllerInventory implements ActionListener, MouseListener {
 				contentConsole = "";
 			}
 			inventory.getLabelContentConsole().setText(initialHTML + contentConsole + finalHTML);
-			System.out.println(contentConsole);
 		} else if (e.getSource() == inventory.getButtonClose()) {
 			System.exit(0);
 		} else if (e.getSource() == inventory.getButtonExecute()) {
-			System.out.println("EXECUTE");
+			String comands[] = contentConsole.split("<br>");
+			moveHeroThread.setComands(comands);
+			moveHeroThread.setIndex(0);
+			
+			/*
+			 * for (int i = 0; i < comands.length; i++) {
+			 * 
+			 * if (comands[i].trim().equals(Util.METHOD_TURN_RIGHT)) {
+			 * 
+			 * moveHeroThread.getHero().changeAparencePosiction(Util.METHOD_TURN_RIGHT);
+			 * 
+			 * } else if (comands[i].trim().equalsIgnoreCase(Util.METHOD_TURN_LEFT)) {
+			 * System.out.println(comands[i].trim());
+			 * moveHeroThread.getHero().changeAparencePosiction(Util.METHOD_TURN_LEFT);
+			 * 
+			 * } else if (comands[i].trim().equalsIgnoreCase(Util.METHOD_MOVE_FRONT)) {
+			 * System.out.println(comands[i].trim());
+			 * moveHeroThread.getHero().calculateFutureXY(); for (int k = 0; k < 32 /
+			 * Hero.VELOCITY; k++) {
+			 * moveHeroThread.setMove(moveHeroThread.getHero().getPosiction()); }
+			 * 
+			 * } else { System.out.println("Entrou em nenhum"); } }
+			 */
+
 		} else {
 			System.out.println("RESET");
 		}
+
 	}
 
 	@Override
@@ -158,6 +186,54 @@ public class ControllerInventory implements ActionListener, MouseListener {
 
 	public void setWindowMain(WindowMain windowMain) {
 		this.windowMain = windowMain;
+	}
+
+	public WindowDialog getWindowDialog() {
+		return windowDialog;
+	}
+
+	public void setWindowDialog(WindowDialog windowDialog) {
+		this.windowDialog = windowDialog;
+	}
+
+	public ControllerGeneralContentDialog getContentDialog() {
+		return contentDialog;
+	}
+
+	public void setContentDialog(ControllerGeneralContentDialog contentDialog) {
+		this.contentDialog = contentDialog;
+	}
+
+	public String getContentConsole() {
+		return contentConsole;
+	}
+
+	public void setContentConsole(String contentConsole) {
+		this.contentConsole = contentConsole;
+	}
+
+	public String getInitialHTML() {
+		return initialHTML;
+	}
+
+	public void setInitialHTML(String initialHTML) {
+		this.initialHTML = initialHTML;
+	}
+
+	public String getFinalHTML() {
+		return finalHTML;
+	}
+
+	public void setFinalHTML(String finalHTML) {
+		this.finalHTML = finalHTML;
+	}
+
+	public moveHeroThread getMoveHeroThread() {
+		return moveHeroThread;
+	}
+
+	public void setMoveHeroThread(moveHeroThread moveHeroThread) {
+		this.moveHeroThread = moveHeroThread;
 	}
 
 }

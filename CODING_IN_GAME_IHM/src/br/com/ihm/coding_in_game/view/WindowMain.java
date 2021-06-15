@@ -2,34 +2,47 @@ package br.com.ihm.coding_in_game.view;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.IOException;
 
+import br.com.ihm.coding_in_game.model.Hero;
+import br.com.ihm.coding_in_game.model.Player;
 
 public class WindowMain extends Window implements KeyListener {
 	public static int WIDTH, HEIGHT;
 	private Inventory inventory;
-	private Phase_01 phase;
+	private Phase_01 phase01;
 	private ChoicePhases choicePhases;
 	private Start start;
-	
+	private Player player;
+	private Hero hero;
 	private static final long serialVersionUID = 1L;
 
-	public WindowMain(int width, int height) {
+	public WindowMain(int width, int height, Player player) {
 		super(width, height);
 		WIDTH = width;
 		HEIGHT = height;
+		this.player = player;
 		setSize(width, height);
 
 		// Instantiation views
-		inventory = new Inventory();
-		phase = new Phase_01();
-		start = new Start();
-		choicePhases = new ChoicePhases();
+		try {
+			hero = new Hero(1, 64, 126, 4, 4, Hero.INITIAL_X, Hero.INITIAL_Y, "/assets/sprite.png");
+
+			inventory = new Inventory(this.player, this.hero);
+			phase01 = new Phase_01(this.player, this.hero);
+			start = new Start();
+			choicePhases = new ChoicePhases();
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		// Add key listenner
 		addKeyListener(this);
 
 		add(inventory);
-		add(phase);
+		add(phase01);
 		add(start);
 		add(choicePhases);
 
@@ -68,14 +81,12 @@ public class WindowMain extends Window implements KeyListener {
 		this.inventory = inventory;
 	}
 
-	
-
-	public Phase_01 getPhase() {
-		return phase;
+	public Phase_01 getPhase01() {
+		return phase01;
 	}
 
-	public void setPhase(Phase_01 phase) {
-		this.phase = phase;
+	public void setPhase01(Phase_01 phase) {
+		this.phase01 = phase;
 	}
 
 	public static long getSerialversionuid() {
@@ -97,7 +108,5 @@ public class WindowMain extends Window implements KeyListener {
 	public void setChoicePhases(ChoicePhases choicePhases) {
 		this.choicePhases = choicePhases;
 	}
-	
-	
 
 }

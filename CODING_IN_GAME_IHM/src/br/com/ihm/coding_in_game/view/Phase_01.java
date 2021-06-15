@@ -5,24 +5,24 @@ import java.awt.Rectangle;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import br.com.ihm.coding_in_game.model.Delimiter;
+import br.com.ihm.coding_in_game.model.Flag;
 import br.com.ihm.coding_in_game.model.Hero;
+import br.com.ihm.coding_in_game.model.Player;
 import br.com.ihm.coding_in_game.model.TileMap;
 
 public class Phase_01 extends Phase {
 	private static final long serialVersionUID = 1L;
-
-	public Phase_01() {
-
+	private Flag flag01, flag02, flag03, flag04;
+	private Delimiter delimiter01, delimiter02, delimiter03, delimiter04, delimiter05, delimiter06;
+	
+	
+	public Phase_01(Player player, Hero hero) {
+		super(player, hero);
 		setBounds(0, 0, 1046, WindowMain.HEIGHT);
 
 		setLayers(new ArrayList<>());
-		try {
-			setHero(new Hero(1, 64, 126, 4, 4, 30, 370, "/assets/sprite.png"));
-		} catch (IOException e) {
-			System.out.println("ERRO HERO NOT FOUND.");
-			e.printStackTrace();
-		}
-
+		
 		init();
 
 		setVisible(false);
@@ -36,21 +36,53 @@ public class Phase_01 extends Phase {
 
 		setBasePathLayers("assets/TILE/TILES_CSV/MAP_01/");
 		setBasePathTileSet("assets/TILE/gfx/");
-
-		setLayerFlags(
-				new TileMap(getBasePathTileSet() + "Overworld.png", getBasePathLayers() + "MAP_01_BANDEIRAS.csv"));
-		setLayerBomb(new TileMap(getBasePathTileSet() + "Overworld.png", getBasePathLayers() + "MAP_01_BOMBA.csv"));
+		setLayerBomb(new TileMap(getBasePathTileSet() + "Overworld.png", getBasePathLayers() + "MAP_01_BOMB.csv"));
 		setLayerObjects(
-				new TileMap(getBasePathTileSet() + "Overworld.png", getBasePathLayers() + "MAP_01_OBJETOS.csv"));
-		setLayerDoor(new TileMap(getBasePathTileSet() + "Overworld.png", getBasePathLayers() + "MAP_01_PORTA.csv"));
+				new TileMap(getBasePathTileSet() + "Overworld.png", getBasePathLayers() + "MAP_01_OBJECTS.csv"));
+		setLayerDoor(new TileMap(getBasePathTileSet() + "Overworld.png", getBasePathLayers() + "MAP_01_DOOR.csv"));
 		setLayerRoadGrass(
-				new TileMap(getBasePathTileSet() + "Overworld.png", getBasePathLayers() + "MAP_01_GRAMA_ESTRADA.csv"));
+				new TileMap(getBasePathTileSet() + "Overworld.png", getBasePathLayers() + "MAP_01_ROAD_GRASS.csv"));
 
 		getLayers().add(getLayerRoadGrass());
 		getLayers().add(getLayerDoor());
 		getLayers().add(getLayerObjects());
 		getLayers().add(getLayerBomb());
-		getLayers().add(getLayerFlags());
+
+		flag01 = new Flag(TileMap.newTileWidth, TileMap.newTileHeight,
+				getHero().getPosX() + (TileMap.newTileWidth * 10), 350);
+		flag02 = new Flag(TileMap.newTileWidth, TileMap.newTileHeight, flag01.getPosX() + (TileMap.newTileWidth * 10),
+				350);
+		flag03 = new Flag(TileMap.newTileWidth, TileMap.newTileHeight, flag02.getPosX(),
+				flag02.getPosY() - (TileMap.newTileHeight * 7));
+
+		flag04 = new Flag(TileMap.newTileWidth, TileMap.newTileHeight, flag03.getPosX(),
+				flag02.getPosY() + (TileMap.newTileHeight * 7));
+
+		delimiter01 = new Delimiter(TileMap.newTileWidth, TileMap.newTileHeight,
+				getHero().getPosX() + (TileMap.newTileWidth * 10), 395);
+
+		delimiter02 = new Delimiter(TileMap.newTileWidth, TileMap.newTileHeight,
+				delimiter01.getPosX() + (TileMap.newTileWidth * 10), 395);
+
+		delimiter03 = new Delimiter(TileMap.newTileWidth, TileMap.newTileHeight, delimiter02.getPosX(),
+				delimiter02.getPosY() - (TileMap.newTileHeight * 7));
+
+		delimiter04 = new Delimiter(TileMap.newTileWidth, TileMap.newTileHeight, delimiter02.getPosX(),
+				delimiter02.getPosY() + (TileMap.newTileHeight * 7));
+
+		setFlags(new ArrayList<>());
+
+		getFlags().add(flag01);
+		getFlags().add(flag02);
+		getFlags().add(flag03);
+		getFlags().add(flag04);
+
+		setDelimiters(new ArrayList<>());
+
+		getDelimiters().add(delimiter01);
+		getDelimiters().add(delimiter02);
+		getDelimiters().add(delimiter03);
+		getDelimiters().add(delimiter04);
 
 		for (TileMap layer : getLayers()) {
 			layer.mountMap();
@@ -63,26 +95,31 @@ public class Phase_01 extends Phase {
 		super.paint(g);
 
 		for (TileMap layer : getLayers()) {
-			// layer.mountMap();
 			g.drawImage(layer.getMap(), 0, 0, 1046, WindowMain.HEIGHT, null);
+
 		}
-		
+
+		for (Rectangle rectangle : getLayerRoadGrass().getBarriersInterceptions()) {
+			g.drawRect(rectangle.x, rectangle.y, rectangle.width, rectangle.height);
+		}
+
+		for (Flag flag : getFlags()) {
+			flag.draw(g);
+		}
+
+		for (Delimiter delimiters : getDelimiters()) {
+			delimiters.draw(g);
+		}
+
 		getHero().draw(g);
 
 	}
 
-	public void ColisionObjectsLayer() {
-		for (Rectangle intercetion : getLayerObjects().getBarriersInterceptions()) {
-			if (getHero().getBounds().intersects(intercetion)) {
-				System.out.println("INTERCECTION");
-				//getHero().setIntersectsObjects(true);
-			}
-		}
-	}
-
 	@Override
 	public void gameUpdate() {
-		ColisionObjectsLayer();
+		colisionObjectsLayer();
+		colisionFlags();
+		colisionBomb();
 	}
 
 	@Override

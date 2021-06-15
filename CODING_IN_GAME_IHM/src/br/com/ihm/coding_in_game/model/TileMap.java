@@ -25,8 +25,8 @@ public class TileMap {
 	private static int mapWidht = numberColumns * tileSize;
 	private static int mapHeight = numberRows * tileSize;
 
-	private int newTileWidth = (int) (Math.ceil((1046.0 / numberColumns)));
-	private int newTileHeight = (int) (Math.ceil((double) WindowMain.HEIGHT / numberRows));
+	public static final int newTileWidth = (int) (Math.ceil((1046.0 / numberColumns)));
+	public static final int newTileHeight = (int) (Math.ceil((double) WindowMain.HEIGHT / numberRows));
 
 	private BufferedImage tileSet;
 	private BufferedImage map = new BufferedImage(mapWidht, mapHeight, BufferedImage.TYPE_4BYTE_ABGR);
@@ -36,8 +36,8 @@ public class TileMap {
 	private ArrayList<Rectangle> barriersInterceptions;
 
 	public TileMap(String nameTileset, String nameMap) {
-		barriersInterceptions = new ArrayList<Rectangle>();
 
+		barriersInterceptions = new ArrayList<Rectangle>();
 		try {
 			tileSet = ImageIO.read(getClass().getClassLoader().getResourceAsStream(nameTileset));
 		} catch (IOException e) {

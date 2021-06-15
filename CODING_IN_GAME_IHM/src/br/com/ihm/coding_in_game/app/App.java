@@ -11,6 +11,7 @@ import br.com.ihm.coding_in_game.controller.ControllerChoicePhases;
 import br.com.ihm.coding_in_game.controller.ControllerInventory;
 import br.com.ihm.coding_in_game.controller.ControllerPhase;
 import br.com.ihm.coding_in_game.controller.ControllerStart;
+import br.com.ihm.coding_in_game.model.Player;
 import br.com.ihm.coding_in_game.view.WindowDialog;
 import br.com.ihm.coding_in_game.view.WindowMain;
 
@@ -39,11 +40,15 @@ public class App {
 		//UIManager.put("ToolTip.foreground", new ColorUIResource(Color.red));
 		//UIManager.put("ToolTip.background", new ColorUIResource(Color.yellow));
 		
+		Player player =	new Player("Felipe", 0);
+		
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		int width = (int) screenSize.getWidth();
 		int height = (int) screenSize.getHeight();
-		WindowMain windowMain = new WindowMain(width, height);
+		WindowMain windowMain = new WindowMain(width, height, player);
 		WindowDialog windowDialog = new WindowDialog(WindowMain.WIDTH / 2, WindowMain.HEIGHT / 2, windowMain);
+		
+		
 		
 		@SuppressWarnings("unused")
 		ControllerStart controllerStart = new ControllerStart(windowMain, windowDialog);

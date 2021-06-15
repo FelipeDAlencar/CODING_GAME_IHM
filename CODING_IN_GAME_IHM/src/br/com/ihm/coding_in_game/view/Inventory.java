@@ -11,25 +11,28 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
+import br.com.ihm.coding_in_game.model.Hero;
+import br.com.ihm.coding_in_game.model.Player;
 import br.com.ihm.coding_in_game.model.Util;
 
-public class Inventory extends Panel {
+public class Inventory extends Game {
 
 	public static final long serialVersionUID = 1L;
-	private BufferedImage[] imgsLife;
-	private JLabel labelBoardMethods, labelConsole, labelScore, labelMoveUp, labelMoveDown, labelTurnLeft,
-			labelTurnRight, labelMoveFront, labelTitleBoardMehtods, labelTitleBoardConsole, labelContentConsole;
-
+	private JLabel labelBoardMethods, labelConsole, labelPainelScore, labelScore, labelMoveUp, labelMoveDown,
+			labelTurnLeft, labelTurnRight, labelMoveFront, labelTitleBoardMehtods, labelTitleBoardConsole,
+			labelContentConsole;
 	private JButton buttonInfo, buttonHelp, buttonDelete, buttonClose, buttonExecute, buttonReset;
-
 	private boolean isInit = true;
+	private Player player;
+	private Hero hero;
 
-
-	public Inventory() {
+	public Inventory(Player player, Hero hero) {
 		setBounds(1046, 0, 320, WindowMain.HEIGHT);
 		setBackground(new Color(58, 47, 36));
-		
-		
+
+		this.player = player;
+		this.hero = hero;
+
 		int x = 10, y = 20;
 		int margin = 90;
 		int width = 30, height = 30;
@@ -75,7 +78,13 @@ public class Inventory extends Panel {
 		width = 73;
 		height = 34;
 
-		labelScore = new JLabel(new ImageIcon(getClass().getClassLoader().getResource("assets/score.png")));
+		labelPainelScore = new JLabel(new ImageIcon(getClass().getClassLoader().getResource("assets/score.png")));
+		labelPainelScore.setBounds(x, y, width, height);
+
+		x = 42;
+		labelScore = new JLabel(String.format("%03d", this.player.getScore()));
+		labelScore.setFont(new Font("Arial", Font.BOLD, 15));
+		labelScore.setForeground(Color.yellow);
 		labelScore.setBounds(x, y, width, height);
 
 		x = 20;
@@ -129,7 +138,6 @@ public class Inventory extends Panel {
 		labelContentConsole.setFont(new Font("Arial Bold", Font.BOLD, 15));
 		labelContentConsole.setBounds(x, y, width, height);
 		labelContentConsole.setToolTipText("<html><center><strong>COMANDOS ADICIONADOS</strong></center></html>");
-	
 
 		width = 300;
 		height = 228;
@@ -176,7 +184,8 @@ public class Inventory extends Panel {
 		add(labelTurnRight);
 		add(labelBoardMethods);
 		add(labelConsole);
-		add(labelScore);
+		// add(labelScore);
+		add(labelPainelScore);
 		add(buttonInfo);
 		add(buttonHelp);
 		add(buttonDelete);
@@ -188,16 +197,7 @@ public class Inventory extends Panel {
 	}
 
 	public void init() {
-		imgsLife = new BufferedImage[5];
-		for (int i = 0; i < imgsLife.length; i++) {
-			try {
-				imgsLife[i] = ImageIO.read(getClass().getResource("/assets/life.png"));
-			} catch (IOException e) {
-				System.out.println("ERROR: IMGLIFE NOT FOUND.");
-				e.printStackTrace();
-			}
-		}
-
+		setLoop(true);
 	}
 
 	public void drawBtnRun(Graphics g) {
@@ -219,40 +219,38 @@ public class Inventory extends Panel {
 		g.setFont(new Font("Arial", Font.BOLD, 15));
 		g.setColor(Color.white);
 		g.drawString("VIDA", 15, 80);
-		for (int i = 0; i < imgsLife.length; i++) {
-			g.drawImage(imgsLife[i], x, y, 30, 30, null);
+		for (BufferedImage image : hero.getImgsLife()) {
+			g.drawImage(image, x, y, 30, 30, null);
 			x += 20;
 		}
 	}
 
 	public void drawScore(Graphics g) {
 		g.setColor(Color.yellow);
-		g.drawString("10", 45, 142);
+		g.drawString(String.format("%03d", player.getScore()), 45, 142);
 	}
 
 	@Override
 	public void paint(Graphics g) {
 		super.paint(g);
-
 		if (isInit) {
 			init();
 			isInit = false;
 		}
 
 		drawLife(g);
-		// drawIcons(g);
-		// drawnButtonRun(g);
 		drawScore(g);
-		// drawBtnReset(g);
+	}
+
+	@Override
+	public void gameUpdate() {
+		// TODO Auto-generated method stub
 
 	}
 
-	public BufferedImage[] getImgsLife() {
-		return imgsLife;
-	}
-
-	public void setImgsLife(BufferedImage[] imgsLife) {
-		this.imgsLife = imgsLife;
+	@Override
+	public void gameRender() {
+		repaint();
 	}
 
 	public JButton getButtonInfo() {
@@ -327,6 +325,14 @@ public class Inventory extends Panel {
 		this.labelConsole = labelConsole;
 	}
 
+	public JLabel getLabelPainelScore() {
+		return labelPainelScore;
+	}
+
+	public void setLabelPainelScore(JLabel labelPainelScore) {
+		this.labelPainelScore = labelPainelScore;
+	}
+
 	public JLabel getLabelScore() {
 		return labelScore;
 	}
@@ -399,6 +405,12 @@ public class Inventory extends Panel {
 		this.labelContentConsole = labelContentConsole;
 	}
 
-	
+	public Player getPlayer() {
+		return player;
+	}
+
+	public void setPlayer(Player player) {
+		this.player = player;
+	}
 
 }
