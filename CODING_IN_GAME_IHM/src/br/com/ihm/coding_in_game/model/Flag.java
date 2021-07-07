@@ -39,6 +39,7 @@ public class Flag {
 	public void draw(Graphics g) {
 		g.drawImage(image, getPosX(), getPosY(), null);
 
+
 	}
 
 	public BufferedImage getImage() {

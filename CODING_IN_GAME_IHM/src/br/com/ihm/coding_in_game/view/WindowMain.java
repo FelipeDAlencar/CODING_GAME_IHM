@@ -2,53 +2,47 @@ package br.com.ihm.coding_in_game.view;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.io.IOException;
-
-import br.com.ihm.coding_in_game.model.Hero;
-import br.com.ihm.coding_in_game.model.Player;
 
 public class WindowMain extends Window implements KeyListener {
 	public static int WIDTH, HEIGHT;
 	private Inventory inventory;
-	private Phase_01 phase01;
-	private ChoicePhases choicePhases;
+	private Phase phase;
 	private Start start;
-	private Player player;
-	private Hero hero;
 	private static final long serialVersionUID = 1L;
+	private Phase phase1, phase2, phase3, phase4;
 
-	public WindowMain(int width, int height, Player player) {
+	public WindowMain(int width, int height) {
 		super(width, height);
 		WIDTH = width;
 		HEIGHT = height;
-		this.player = player;
 		setSize(width, height);
 
+		phase1 = new Phase_01();
+		phase2 = new Phase_02();
+		phase3 = new Phase_03();
+		phase4 = new Phase_04();
+
+		phase = phase1;
 		// Instantiation views
-		try {
-			hero = new Hero(1, 64, 126, 4, 4, Hero.INITIAL_X, Hero.INITIAL_Y, "/assets/sprite.png");
-
-			inventory = new Inventory(this.player, this.hero);
-			phase01 = new Phase_01(this.player, this.hero);
-			start = new Start();
-			choicePhases = new ChoicePhases();
-
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		inventory = new Inventory(phase);
+		start = new Start();
 
 		// Add key listenner
 		addKeyListener(this);
 
 		add(inventory);
-		add(phase01);
+		add(phase4);
+		add(phase3);
+		add(phase2);
+		add(phase1);
+		add(phase);
 		add(start);
-		add(choicePhases);
 
 		setVisible(true);
 
 	}
+	
+	
 
 	@Override
 	public void keyPressed(KeyEvent e) {
@@ -81,12 +75,12 @@ public class WindowMain extends Window implements KeyListener {
 		this.inventory = inventory;
 	}
 
-	public Phase_01 getPhase01() {
-		return phase01;
+	public Phase getPhase() {
+		return phase;
 	}
 
-	public void setPhase01(Phase_01 phase) {
-		this.phase01 = phase;
+	public void setPhase(Phase phase) {
+		this.phase = phase;
 	}
 
 	public static long getSerialversionuid() {
@@ -101,12 +95,36 @@ public class WindowMain extends Window implements KeyListener {
 		this.start = start;
 	}
 
-	public ChoicePhases getChoicePhases() {
-		return choicePhases;
+	public Phase getPhase2() {
+		return phase2;
 	}
 
-	public void setChoicePhases(ChoicePhases choicePhases) {
-		this.choicePhases = choicePhases;
+	public void setPhase2(Phase phase2) {
+		this.phase2 = phase2;
+	}
+
+	public Phase getPhase3() {
+		return phase3;
+	}
+
+	public void setPhase3(Phase phase3) {
+		this.phase3 = phase3;
+	}
+
+	public Phase getPhase4() {
+		return phase4;
+	}
+
+	public void setPhase4(Phase phase4) {
+		this.phase4 = phase4;
+	}
+
+	public Phase getPhase1() {
+		return phase1;
+	}
+
+	public void setPhase1(Phase phase1) {
+		this.phase1 = phase1;
 	}
 
 }

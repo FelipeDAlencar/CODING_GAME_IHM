@@ -5,22 +5,19 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import br.com.ihm.coding_in_game.model.Util;
 import br.com.ihm.coding_in_game.model.moveHeroThread;
 import br.com.ihm.coding_in_game.view.Phase;
-import br.com.ihm.coding_in_game.view.WindowMain;
+import br.com.ihm.coding_in_game.view.WindowDialog;
 
 public class ControllerPhase implements ActionListener, KeyListener {
 
 	private Phase phase;
-	private WindowMain window;
+	private WindowDialog windowDialog;
 	private moveHeroThread moveHeroThread;
 
-	public ControllerPhase(WindowMain window) {
-		this.window = window;
-		this.phase = this.window.getPhase01();
-		moveHeroThread = new moveHeroThread(phase.getHero());
-
+	public ControllerPhase(WindowDialog windowDialog) {
+		this.windowDialog = windowDialog;
+		this.phase = this.windowDialog.getWindowParent().getPhase();
 		phase.addKeyListener(this);
 	}
 
@@ -31,19 +28,43 @@ public class ControllerPhase implements ActionListener, KeyListener {
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		int code = e.getKeyCode();
 
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		int code = e.getKeyCode();
 
 	}
 
 	@Override
 	public void keyTyped(KeyEvent e) {
 
+	}
+
+	public Phase getPhase() {
+		return phase;
+	}
+
+	public void setPhase(Phase phase) {
+		this.phase = phase;
+	}
+	
+	
+	
+	public moveHeroThread getMoveHeroThread() {
+		return moveHeroThread;
+	}
+
+	public WindowDialog getWindowDialog() {
+		return windowDialog;
+	}
+
+	public void setWindowDialog(WindowDialog windowDialog) {
+		this.windowDialog = windowDialog;
+	}
+
+	public void setMoveHeroThread(moveHeroThread moveHeroThread) {
+		this.moveHeroThread = moveHeroThread;
 	}
 
 }

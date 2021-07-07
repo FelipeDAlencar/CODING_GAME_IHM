@@ -9,23 +9,28 @@ public class WindowDialog extends Window {
 	private SettingsDialog settings;
 	private GeneralContentDialog generalContentDialog;
 	private WindowMain windowParent;
+	private ChoicePhases choicePhases;
+	private SelectPlayer selectUser;
 
 	public WindowDialog(int width, int height, WindowMain windowParent) {
 		super(width, height);
 		setBackground(new Color(0, 0, 0, 0));
 
+		this.windowParent = windowParent;
+
 		contentHelp = new ContentHelpDialog(this);
 		confirmExit = new ConfirmExitDialog(this);
 		settings = new SettingsDialog(this);
-
 		generalContentDialog = new GeneralContentDialog(this);
-
-		this.windowParent = windowParent;
-
+		choicePhases = new ChoicePhases(this.windowParent.getPhase().getPlayer(), this);
+		selectUser = new SelectPlayer(this);
+		
+		add(choicePhases);
 		add(contentHelp);
 		add(confirmExit);
 		add(settings);
 		add(generalContentDialog);
+		add(selectUser);
 		
 		setVisible(false);
 
@@ -70,5 +75,22 @@ public class WindowDialog extends Window {
 	public void setGeneralContentDialog(GeneralContentDialog generalContentDialog) {
 		this.generalContentDialog = generalContentDialog;
 	}
+
+	public ChoicePhases getChoicePhases() {
+		return choicePhases;
+	}
+
+	public void setChoicePhases(ChoicePhases choicePhases) {
+		this.choicePhases = choicePhases;
+	}
+
+	public SelectPlayer getSelectUser() {
+		return selectUser;
+	}
+
+	public void setSelectUser(SelectPlayer selectUser) {
+		this.selectUser = selectUser;
+	}
+	
 
 }

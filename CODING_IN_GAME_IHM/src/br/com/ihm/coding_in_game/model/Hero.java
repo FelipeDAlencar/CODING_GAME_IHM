@@ -3,26 +3,23 @@ package br.com.ihm.coding_in_game.model;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.util.ArrayList;
 
-import javax.imageio.ImageIO;
 
 public class Hero extends Sprite {
 	private int x, y, futureX, futureY;
 	private boolean visible;
 	private Image image;
 	private int life;
-	public static final int VELOCITY = 1;
+	public static int VELOCITY = 1;
 	public static int INTERVAL_MOVE_X = (TileMap.newTileWidth * 10);
 	public static int INTERVAL_MOVE_Y = (TileMap.newTileHeight * 7);
-	public static final int INITIAL_X = 35;
-	public static final int INITIAL_Y = 370;
+	public static int INITIAL_X = 35;
+	public static int INITIAL_Y = 370;
 	private int posiction;
 	private boolean intersectsObjects;
 	private boolean inMove;
-	private ArrayList<BufferedImage> imgsLife;
+	private boolean alreadyMoved;
 
 	public Hero(int aparence, int width, int height, int cols, int rows, int posX, int posY, String path)
 			throws IOException {
@@ -38,46 +35,37 @@ public class Hero extends Sprite {
 		futureX = posX;
 		futureY = posY;
 
-		imgsLife = new ArrayList<>();
-		for (int i = 0; i < 5; i++) {
-			try {
-				BufferedImage image = ImageIO.read(getClass().getResource("/assets/life.png"));
-				imgsLife.add(image);
-			} catch (IOException e) {
-				System.out.println("ERROR: IMGLIFE NOT FOUND.");
-				e.printStackTrace();
-			}
-		}
+	
 	}
 
-	public void moveHero(int dx, int dy, String direction) {
+	public void moveHero(int dx, int dy, int direction) {
 
 		setPosX(getPosX() + dx);
 		setPosY(getPosY() + dy);
 
-		if (direction.equals(Util.UP)) {
+		if (direction == Util.POSICTION_UP) {
 			setY(getY() - VELOCITY);
 		}
 
-		if (direction.equals(Util.DOWN)) {
+		if (direction == Util.POSICTION_DOWN) {
 			setY(getY() + VELOCITY);
 		}
 
-		if (direction.equals(Util.LEFT)) {
+		if (direction == Util.POSICTION_LEFT) {
 			setX(getX() - VELOCITY);
 		}
 
-		if (direction.equals(Util.RIGHT)) {
+		if (direction == Util.POSICTION_RIGHT) {
 			setX(getX() + VELOCITY);
 		}
 
 	}
 
 	@Override
-	public void animate(String direction) {
+	public void animate(int direction) {
 		setDirection(direction);
 
-		if (direction.equals(Util.UP)) {
+		if (direction == Util.POSICTION_UP) {
 
 			switch (getUp()) {
 
@@ -103,7 +91,7 @@ public class Hero extends Sprite {
 
 		}
 
-		if (direction.equals(Util.DOWN)) {
+		if (direction == Util.POSICTION_DOWN) {
 
 			switch (getDown()) {
 
@@ -129,7 +117,7 @@ public class Hero extends Sprite {
 
 		}
 
-		if (direction.equals(Util.LEFT)) {
+		if (direction == Util.POSICTION_LEFT) {
 
 			switch (getLeft()) {
 
@@ -154,7 +142,7 @@ public class Hero extends Sprite {
 
 		}
 
-		if (direction.equals(Util.RIGHT)) {
+		if (direction == Util.POSICTION_RIGHT) {
 
 			switch (getRight()) {
 			case 0:
@@ -202,7 +190,7 @@ public class Hero extends Sprite {
 				break;
 
 			default:
-				System.out.println("Não setou a aparência");
+				System.out.println("Nï¿½o setou a aparï¿½ncia");
 				break;
 			}
 			break;
@@ -228,12 +216,12 @@ public class Hero extends Sprite {
 				break;
 
 			default:
-				System.out.println("Não setou a aparência");
+				System.out.println("Nï¿½o setou a aparï¿½ncia");
 				break;
 			}
 			break;
 		default:
-			System.out.println("Não entrou no primeiro switch");
+			System.out.println("Nï¿½o entrou no primeiro switch");
 			break;
 		}
 
@@ -349,12 +337,13 @@ public class Hero extends Sprite {
 		this.inMove = inMove;
 	}
 
-	public ArrayList<BufferedImage> getImgsLife() {
-		return imgsLife;
+	
+	public boolean isAlreadyMoved() {
+		return alreadyMoved;
 	}
 
-	public void setImgsLife(ArrayList<BufferedImage> imgsLife) {
-		this.imgsLife = imgsLife;
+	public void setAlreadyMoved(boolean alreadyMoved) {
+		this.alreadyMoved = alreadyMoved;
 	}
 
 }

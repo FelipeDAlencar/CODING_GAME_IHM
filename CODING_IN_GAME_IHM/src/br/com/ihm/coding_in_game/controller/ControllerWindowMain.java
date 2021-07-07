@@ -17,7 +17,18 @@ public class ControllerWindowMain implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 
 		
+		
 	}
+
+	public WindowMain getWindow() {
+		return window;
+	}
+
+	public void setWindow(WindowMain window) {
+		this.window = window;
+	}
+	
+	
 
 	
 	

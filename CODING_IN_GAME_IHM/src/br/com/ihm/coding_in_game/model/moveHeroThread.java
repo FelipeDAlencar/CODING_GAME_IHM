@@ -1,6 +1,6 @@
 package br.com.ihm.coding_in_game.model;
 
-import java.util.Arrays;
+import br.com.ihm.coding_in_game.view.Inventory;
 
 public class moveHeroThread extends Thread {
 	private Hero hero;
@@ -8,9 +8,12 @@ public class moveHeroThread extends Thread {
 	private int move = 4;
 	private String[] comands;
 	private int index;
+	private Inventory inventory;
+	int tempInterval = 200;
 
-	public moveHeroThread(Hero hero) {
+	public moveHeroThread(Hero hero, Inventory inventory) {
 		this.hero = hero;
+		this.inventory = inventory;
 		start();
 	}
 
@@ -38,7 +41,7 @@ public class moveHeroThread extends Thread {
 			if (hero.getPosY() != hero.getFutureY()) {
 				dy = -Hero.VELOCITY;
 				dx = 0;
-				updateMoveHero("up");
+				updateMoveHero(Util.POSICTION_UP);
 			} else {
 				move = 4;
 				hero.setInMove(false);
@@ -48,7 +51,7 @@ public class moveHeroThread extends Thread {
 			if (hero.getPosY() != hero.getFutureY()) {
 				dy = Hero.VELOCITY;
 				dx = 0;
-				updateMoveHero("down");
+				updateMoveHero(Util.POSICTION_DOWN);
 			} else {
 				move = 4;
 				hero.setInMove(false);
@@ -58,7 +61,7 @@ public class moveHeroThread extends Thread {
 			if (hero.getPosX() != hero.getFutureX()) {
 				dx = -Hero.VELOCITY;
 				dy = 0;
-				updateMoveHero("left");
+				updateMoveHero(Util.POSICTION_LEFT);
 			} else {
 				move = 4;
 				hero.setInMove(false);
@@ -69,7 +72,7 @@ public class moveHeroThread extends Thread {
 
 				dx = Hero.VELOCITY;
 				dy = 0;
-				updateMoveHero("right");
+				updateMoveHero(Util.POSICTION_RIGHT);
 			} else {
 				move = 4;
 				hero.setInMove(false);
@@ -82,42 +85,65 @@ public class moveHeroThread extends Thread {
 
 	}
 
-	public void updateMoveHero(String direction) throws InterruptedException {
-		hero.moveHero(dx, dy, direction);
-		hero.animate(direction);
+	public void updateMoveHero(int posiction) throws InterruptedException {
+		hero.moveHero(dx, dy, posiction);
+		hero.animate(posiction);
 	}
 
 	public void iteratorComands() throws InterruptedException {
-		int temp = 200;
+
 		if ((comands != null) && comands.length != 0) {
 			if (!hero.isInMove()) {
 				while (index < comands.length) {
+
 					if (comands[index].trim().equalsIgnoreCase(Util.METHOD_MOVE_FRONT)) {
+						verifyEndComands();
 						hero.calculateFutureXY();
 						move = hero.getPosiction();
 						hero.setInMove(true);
 						index++;
-						break; // PAREI AQUI
+						break;
 					} else if (comands[index].trim().equalsIgnoreCase(Util.METHOD_TURN_RIGHT)) {
 						hero.changeAparencePosiction(Util.METHOD_TURN_RIGHT);
-						sleep(temp);
+						sleep(tempInterval);
 					} else if (comands[index].trim().equalsIgnoreCase(Util.METHOD_TURN_LEFT)) {
 						hero.changeAparencePosiction(Util.METHOD_TURN_LEFT);
-						sleep(temp);
+						sleep(tempInterval);
 					} else {
 						System.out.println("Entrou em nenhum");
 					}
-					if ((index + 1) >= comands.length) {
-						comands = null;
+					if (verifyEndComands()) {
 						break;
 					} else {
 						index++;
 					}
+
 				}
 
 			}
+
 		}
 
+	}
+
+	public void turnButtonsUnlock() {
+		inventory.setLockInventary(false);
+		inventory.getButtonDelete().setIcon(inventory.getImgButtonTrashNormal());
+		inventory.getButtonExecute().setIcon(inventory.getImgButtonExecuteNormal());
+		inventory.getButtonReset().setIcon(inventory.getImgButtonResetNormal());
+		inventory.getButtonInfo().setIcon(inventory.getImgButtonInfoNormal());
+		inventory.getButtonHome().setIcon(inventory.getImgButtonHomeNormal());
+		inventory.getButtonHelp().setIcon(inventory.getImgButtonHelpNormal());
+		inventory.getTextAreaConsole().setText("");
+	}
+
+	public boolean verifyEndComands() {
+		if ((index + 1) >= comands.length) {
+			turnButtonsUnlock();
+			comands = null;
+			return true;
+		}
+		return false;
 	}
 
 	public Hero getHero() {
@@ -166,6 +192,14 @@ public class moveHeroThread extends Thread {
 
 	public void setIndex(int index) {
 		this.index = index;
+	}
+
+	public Inventory getInventory() {
+		return inventory;
+	}
+
+	public void setInventory(Inventory inventory) {
+		this.inventory = inventory;
 	}
 
 }

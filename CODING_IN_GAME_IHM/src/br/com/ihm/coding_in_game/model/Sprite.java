@@ -13,7 +13,7 @@ public abstract class Sprite {
 	protected BufferedImage[] sprites;
 	protected int aparence;
 	protected int up, down, left, right;
-	private String direction;
+	private int direction;
 
 	protected Sprite(int aparence, int width, int height, int cols, int rows, int posX, int posY, String path) throws IOException {
 
@@ -40,7 +40,7 @@ public abstract class Sprite {
 		}
 	}
 
-	public abstract void animate(String direcao);
+	public abstract void animate(int any);
 
 	public BufferedImage getHero() {
 		return hero;
@@ -146,13 +146,14 @@ public abstract class Sprite {
 		this.right = right;
 	}
 
-	public String getDirection() {
+	public int getDirection() {
 		return direction;
 	}
 
-	public void setDirection(String direction) {
+	public void setDirection(int direction) {
 		this.direction = direction;
 	}
+
 
 	
 	
